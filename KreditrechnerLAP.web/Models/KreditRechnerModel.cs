@@ -12,14 +12,14 @@ namespace KreditrechnerLAP.web.Models
         [Required]
         public int ID { get; set; }
 
-        [Required]
-        [Range(3000,40000)]
-        [DefaultValue(3000)]
+        [Required(ErrorMessage = "Pflichtfeld")]
+        [Display(Name = "Gewünschter Betrag")]
+        [Range(3000,40000,ErrorMessage = "Betrag muss zwischen 3.000€ und 40.000€ sein")]
         public int Kreditbetrag { get; set; }
 
-        [Required]
-        [Range(12,60)]
-        [DefaultValue(12)]
+        [Required(ErrorMessage = "Pflichtfeld")]
+        [Display(Name = "Gewünschter Betrag")]
+        [Range(3000, 40000, ErrorMessage = "Betrag muss zwischen 3.000€ und 40.000€ sein")]
         public int Laufzeit { get; set; }
 
         [Required]
