@@ -9,8 +9,7 @@ namespace KreditrechnerLAP.web.Models
 {
     public class KreditRechnerModel
     {
-        [Required]
-        public int ID { get; set; }
+
 
         [Required(ErrorMessage = "Pflichtfeld")]
         [Display(Name = "Gewünschter Betrag")]
@@ -18,12 +17,10 @@ namespace KreditrechnerLAP.web.Models
         public int Kreditbetrag { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Gewünschter Betrag")]
-        [Range(3000, 40000, ErrorMessage = "Betrag muss zwischen 3.000€ und 40.000€ sein")]
+        [Display(Name = "Gewünschte Rate")]
+        [Range(12, 120, ErrorMessage = "Rate muss zwichen 12 und 120 Monate sein")]
         public int Laufzeit { get; set; }
 
-        [Required]
-        public double RateMonatlich { get; set; }
 
 
     }
