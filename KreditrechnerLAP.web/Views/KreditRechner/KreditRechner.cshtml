@@ -16,21 +16,30 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Kreditbetrag, htmlAttributes: new { @class = "control-label col-md-2" })
+             @Html.LabelFor(model => model.Kreditbetrag, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-2"><label>Kredit</label></div>*@
             <div class="col-md-10">
-                <input type="text" id="example_id" name="example_name" onChange="berechnen()"/>
+                <input type="text" id="example_id" name="example_name" onChange="berechnen(); Zinsen1();"  />
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Laufzeit, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-2"><label>Monate</label></div>*@
             <div class="col-md-10">
                 <input type="text" id="example_id2" name="example_name2" onChange="berechnen()"/>
             </div>
         </div>
-        <div class="col-md-offset-6">
+        <div class="col-md-2" style="text-align:center;">
+            <div >
+                <input id="Zinsen" value="1.05" min="1.05" max="3.5" style="border:none; background-color:#FFF;width: 31px;"  disabled />%
+            </div>
+        </div>
+        <div class="col-md-10" style="text-align:center;">
             <div>
-                <span id="ergebnis">83.33</span> €
+            <div style="background-color:rgba(26, 94, 113, 0.83);border-radius: 5px;height: 40px;">
+                <span id="ergebnis" >83.33</span> €
+            </div>
             </div>
         </div>
         <div class="col-md-4"></div>
@@ -99,12 +108,30 @@
             });
         });
 
+//Raten Berechnung
 function berechnen() {
-    var $kredit = document.getElementById('example_id').value;
-    var $monat = document.getElementById('example_id2').value
-    erg =  Math.round(($kredit / $monat)*100)/100;
+    var kredit = document.getElementById('example_id').value;
+    var monat = document.getElementById('example_id2').value;
+    var zinsen = document.getElementById('Zinsen').value;
+    erg =  Math.round(((kredit / monat)* zinsen)*100)/100;
     document.getElementById('ergebnis').innerHTML = erg;
    
+}
+
+//Zinsen ermittlung 
+function Zinsen1() {
+    var kredit = document.getElementById('example_id').value;
+    var erg = 1.05;
+    if (kredit <= 10000) {
+        erg = 2.5;
+    }
+    else if (kredit <= 20000){
+        erg = 2.0;
+    }
+    else if (kredit <= 30000){
+        erg = 1.5;
+        }
+    document.getElementById('Zinsen').value = erg;
 }
 
 

@@ -2,19 +2,134 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2>KreditRechner</h2>
 
-<h2>Home - Index</h2>
 
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>KreditRechnerModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @* @Html.LabelFor(model => model.Kreditbetrag, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-2"><label>Kredit</label></div>
+            <div class="col-md-10">
+                <input type="text" id="example_id" name="example_name" onChange="berechnen(); Zinsen1();"  />
+            </div>
+        </div>
 
-<input type="text" id="example_id" name="example_name" value="" />
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.Laufzeit, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-2"><label>Monate</label></div>
+            <div class="col-md-10">
+                <input type="text" id="example_id2" name="example_name2" onChange="berechnen()"/>
+            </div>
+        </div>
+        <div class="col-md-offset-3">
+            <div>
+                <input id="Zinsen" value="1.05" min="1.05" max="3.5" style="border:none; background-color:#FFF"  disabled/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <span id="ergebnis">83.33</span> €
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        //http://ionden.com/a/plugins/ion.rangeSlider/en.html
+<script type="text/javascript">
+        
+//Ergebnis slider 1
         $(document).ready(function () {
-            $("#example_id").ionRangeSlider();
+            var $range = $("#example_id"),
+                $result = $("#result_1");
+
+            var track = function (data) {
+                $result.html("Value: " + data.from);
+            };
+
+            $range.ionRangeSlider({
+                type: "single",
+                grid: true,
+                min: 3000,
+                max: 40000,
+                from: 5000,
+                step: 500,
+                postfix: " €",
+                onStart: track,
+                onChange: track,
+                onFinish: track,
+                onUpdate: track
+            });
         });
-    </script>
+
+    //ergebnis Slider 2
+        $(document).ready(function () {
+            var $range = $("#example_id2"),
+                $result = $("#result_2");
+
+            var track = function (data) {
+                $result.html("Value: " + data.from);
+            };
+
+            $range.ionRangeSlider({
+                type: "single",
+                grid: true,
+                min: 12,
+                max: 120,
+                from: 60,
+                step: 6,
+                postfix: " Monate",
+                onStart: track,
+                onChange: track,
+                onFinish: track,
+                onUpdate: track
+            });
+        });
+
+//Raten Berechnung
+function berechnen() {
+    var kredit = document.getElementById('example_id').value;
+    var monat = document.getElementById('example_id2').value;
+    var zinsen = document.getElementById('Zinsen').value;
+    erg =  Math.round(((kredit / monat)* zinsen)*100)/100;
+    document.getElementById('ergebnis').innerHTML = erg;
+   
+}
+
+//Zinsen ermittlung 
+function Zinsen1() {
+    var kredit = document.getElementById('example_id').value;
+    var erg = 1.05;
+    if (kredit <= 10000) {
+        erg = 2.5;
+    }
+    else if (kredit <= 20000){
+        erg = 2.0;
+    }
+    else if (kredit <= 30000){
+        erg = 1.5;
+        }
+    document.getElementById('Zinsen').value = erg;
+}
+
+
+</script>
 }
