@@ -9,11 +9,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2C3C0C34-C870-4B38-8B81-C0C2693355CF}</ProjectGuid>
+    <ProjectGuid>{20907C82-BB96-436F-BA00-CB3141ADE3AE}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.web</RootNamespace>
+    <RootNamespace>LapprojektDemo.web</RootNamespace>
     <AssemblyName>ASP.NET MVC</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -127,60 +127,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\chocolat.css" />
-    <Content Include="Content\css\common.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
-    <Content Include="Content\css\rangeslider.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\images\arr.png" />
-    <Content Include="Content\images\banner1.jpg" />
-    <Content Include="Content\images\banner2.jpg" />
-    <Content Include="Content\images\banner3.jpg" />
-    <Content Include="Content\images\banner4.jpg" />
-    <Content Include="Content\images\blog1.jpeg" />
-    <Content Include="Content\images\blog2.jpg" />
-    <Content Include="Content\images\blog3.jpg" />
-    <Content Include="Content\images\closew.gif" />
-    <Content Include="Content\images\gallery1.jpg" />
-    <Content Include="Content\images\gallery2.jpg" />
-    <Content Include="Content\images\gallery3.jpg" />
-    <Content Include="Content\images\gallery4.jpeg" />
-    <Content Include="Content\images\gallery5.jpg" />
-    <Content Include="Content\images\gallery6.jpeg" />
-    <Content Include="Content\images\gallery7.jpg" />
-    <Content Include="Content\images\left-arrow.png" />
-    <Content Include="Content\images\left.jpg" />
-    <Content Include="Content\images\leftw.gif" />
-    <Content Include="Content\images\price.jpg" />
-    <Content Include="Content\images\right-arrow.png" />
-    <Content Include="Content\images\rightw.gif" />
-    <Content Include="Content\images\t1.jpg" />
-    <Content Include="Content\images\t2.jpg" />
-    <Content Include="Content\images\t3.jpg" />
-    <Content Include="Content\images\t4.jpg" />
-    <Content Include="Content\js\bootstrap-3.1.1.min.js" />
-    <Content Include="Content\js\easing.js" />
-    <Content Include="Content\js\jquery-2.1.4.min.js" />
-    <Content Include="Content\js\jquery.chocolat.js" />
-    <Content Include="Content\js\jquery.hoverdir.js" />
-    <Content Include="Content\js\modernizr.custom.js" />
-    <Content Include="Content\js\move-top.js" />
-    <Content Include="Content\js\rangeslider.js" />
-    <Content Include="Content\js\rangeslider.min.js" />
-    <Content Include="Content\js\responsiveslides.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
