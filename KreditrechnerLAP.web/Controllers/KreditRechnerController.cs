@@ -48,17 +48,18 @@ namespace KreditrechnerLAP.web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Finanzielles(KreditRechnerModel model)
+        public ActionResult Finanzielles(FinanziellesModel model)
         {
             Debug.WriteLine("POST - KreditRechnerController - Finanzielles");
             Debug.Indent();
+            Debugger.Break();
             if (ModelState.IsValid)
             {
                 //Business Logic
 
                 return RedirectToAction("PersoenlicheDaten");
             }
-
+            Debugger.Break();
             Debug.Unindent();
             return View(model);
         }
