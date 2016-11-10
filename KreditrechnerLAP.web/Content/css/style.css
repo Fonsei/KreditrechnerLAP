@@ -13,6 +13,7 @@
     font-size: 30px;    
 }
 
+
 /**/
 html, body{
 	margin:0;
@@ -2826,3 +2827,7 @@ label {
 }
 /*--//responsive--*/
 
+input[type="text"]{
+        border:none;
+        background-color:#ececec;
+    }

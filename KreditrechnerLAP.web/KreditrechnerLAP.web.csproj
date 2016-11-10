@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Models\FinanziellesModel.cs" />
     <Compile Include="Models\KreditRechnerModel.cs" />
+    <Compile Include="Models\PersoenlicheDatenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\KreditRechner\KreditRechner.cshtml" />
     <Content Include="Views\KreditRechner\Finanzielles.cshtml" />
+    <Content Include="Views\KreditRechner\PersoenlicheDaten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

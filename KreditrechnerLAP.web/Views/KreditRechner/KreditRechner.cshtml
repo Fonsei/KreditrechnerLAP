@@ -111,10 +111,14 @@
 
 //Raten Berechnung
 function berechnen() {
-    var kredit = document.getElementById('example_id').value;
-    var monat = document.getElementById('example_id2').value;
-    var zinsen = document.getElementById('Zinsen').value;
-    erg =  Math.round(((kredit / monat)* zinsen)*100)/100;
+    var kredit = parseInt(document.getElementById('example_id').value);
+    var monat = parseInt(document.getElementById('example_id2').value);
+    var zinsen = parseFloat(document.getElementById('Zinsen').value);
+    //erg = Math.round(((kredit / monat) * zinsen) * 100) / 100;
+
+    erg = Math.round(((  (kredit/100) * zinsen + kredit) /monat) * 100) / 100;
+     
+
     document.getElementById('ergebnis').innerHTML = erg;
    
 }

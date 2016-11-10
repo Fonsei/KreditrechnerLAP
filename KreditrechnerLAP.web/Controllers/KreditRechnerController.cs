@@ -28,6 +28,8 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.Indent();
             if (ModelState.IsValid)
             {
+                //Business Logic
+
                 return RedirectToAction("Finanzielles");
             }
             Debugger.Break();
@@ -52,6 +54,36 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.Indent();
             if (ModelState.IsValid)
             {
+                //Business Logic
+
+                return RedirectToAction("PersoenlicheDaten");
+            }
+
+            Debug.Unindent();
+            return View(model);
+        }
+
+
+        public ActionResult PersoenlicheDaten()
+        {
+            Debug.WriteLine("GET - KreditRechnerController - PersoenlicheDaten");
+            Debug.Indent();
+
+
+            Debug.Unindent();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PersoenlicheDaten(PersoenlicheDatenModel model)
+        {
+            Debug.WriteLine("POST - KreditRechnerController - Finanzielles");
+            Debug.Indent();
+            if (ModelState.IsValid)
+            {
+                //Business Logic
+
+
                 return RedirectToAction("Finanzielles");
             }
 
