@@ -1,9 +1,19 @@
-/*--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
---*/
+
+.c{
+    text-align:center;
+}
+
+.ratedisplay{
+    background-color: rgba(26, 94, 113, 0.83);
+    border-radius: 5px;
+    height: 45px;
+    display: inline-block;
+    width: 200px;
+    color: #FFF;
+    font-size: 30px;    
+}
+
+/**/
 html, body{
 	margin:0;
 	font-size: 100%;
@@ -2815,3 +2825,4 @@ label {
 	}
 }
 /*--//responsive--*/
+

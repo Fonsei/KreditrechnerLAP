@@ -4,7 +4,7 @@
     ViewBag.Title = "KreditRechner";
 }
 
-<h2>KreditRechner</h2>
+
 
 
 @using (Html.BeginForm()) 
@@ -12,12 +12,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>KreditRechnerModel</h4>
+        <h1>KreditRechner</h1>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Kreditbetrag, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Kreditbetrag, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Kreditbetrag, new { htmlAttributes = new {@id="example_id", @class = "form-control", @onChange="berechnen(); Zinsen1();" } })
                 @Html.ValidationMessageFor(model => model.Kreditbetrag, "", new { @class = "text-danger" })
                 
@@ -25,29 +25,27 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Laufzeit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Laufzeit, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Laufzeit, new { htmlAttributes = new {@id="example_id2", @class = "form-control",@onChange="berechnen(); Zinsen1();" } })
                 @Html.ValidationMessageFor(model => model.Laufzeit, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Zinsen, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Zinsen, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                <input id="Zinsen" value="1.05" min="1.05" max="3.5" style="border:none; background-color:#FFF;width: 31px;"  disabled />%
             </div>
         </div>
-        <div class="col-md-10" style="text-align:center;">
-            <div>
-            <div style="background-color:rgba(26, 94, 113, 0.83);border-radius: 5px;height: 40px;">
+        <div class="col-md-12" style="text-align:center;">
+            <div class="ratedisplay">
                 <span id="ergebnis" >83.33</span> €
-            </div>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-12">
+                <input type="submit" value="Beantragen" class="btn btn-default" />
             </div>
         </div>
     </div>
