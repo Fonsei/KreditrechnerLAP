@@ -15,26 +15,29 @@ namespace KreditrechnerLAP.web.Models
     {
         [Required(ErrorMessage = "Pflichtfeld")]
         [Display(Name = "Geschlecht")]
+        [EnumDataType(typeof(Geschlecht))]
         public Geschlecht Geschlecht { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Vorname")]
+        [Display(Name = "Vorname", Prompt = "Max")]
         public string Vorname { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Nachname")]
+        [Display(Name = "Nachname", Prompt = "Mustermann")]
         public string Nachname { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Geburtsdatum")]
+        [Display(Name = "Geburtsdatum", Prompt = "1988-08-08")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Geburtsdatum { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Familienstand")]
+        [Display(Name = "Familienstand", Prompt = "Verheiratet")]
         public string Familienstand { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Staatsbürger")]
+        [Display(Name = "Staatsbürger", Prompt = "Österreich")]
         public string Staatsbuerger { get; set; }
 
 
