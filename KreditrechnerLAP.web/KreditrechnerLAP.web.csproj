@@ -134,6 +134,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\chocolat.css" />
     <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\ion.rangeSlider.css" />
     <Content Include="Content\css\ion.rangeSlider.skinHTML5.css" />
@@ -160,6 +161,7 @@
     <Content Include="Content\images\left-arrow.png" />
     <Content Include="Content\images\left.jpg" />
     <Content Include="Content\images\leftw.gif" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\price.jpg" />
     <Content Include="Content\images\right-arrow.png" />
     <Content Include="Content\images\rightw.gif" />
@@ -168,6 +170,7 @@
     <Content Include="Content\images\t3.jpg" />
     <Content Include="Content\images\t4.jpg" />
     <Content Include="Content\js\bootstrap-3.1.1.min.js" />
+    <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\easing.js" />
     <Content Include="Content\js\ion.rangeSlider.js" />
     <Content Include="Content\js\ion.rangeSlider.min.js" />
