@@ -66,6 +66,10 @@ namespace KreditrechnerLAP.web.Controllers
             return View(model);
         }
 
+        public ActionResult PersoenlicheDaten2()
+        {
+            return View();
+        }
 
         public ActionResult PersoenlicheDaten()
         {
