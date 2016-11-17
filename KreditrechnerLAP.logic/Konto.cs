@@ -20,6 +20,6 @@ namespace KreditrechnerLAP.logic
         public string BIC { get; set; }
         public string Bankname { get; set; }
     
-        public virtual Kunden AlleKunde { get; set; }
+        public virtual Kunde AlleKunde { get; set; }
     }
 }

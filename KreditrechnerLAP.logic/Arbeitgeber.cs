@@ -22,6 +22,6 @@ namespace KreditrechnerLAP.logic
     
         public virtual Beschaeftigungsart AlleBeschaeftigungsart { get; set; }
         public virtual Branche AlleBranche { get; set; }
-        public virtual Kunden AlleKunde { get; set; }
+        public virtual Kunde AlleKunde { get; set; }
     }
 }

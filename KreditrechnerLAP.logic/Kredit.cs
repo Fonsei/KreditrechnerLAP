@@ -14,11 +14,11 @@ namespace KreditrechnerLAP.logic
     
     public partial class Kredit
     {
-        public int IDKredit { get; set; }
-        public Nullable<decimal> Bezeichnung { get; set; }
+        public int ID { get; set; }
+        public Nullable<decimal> Betrag { get; set; }
         public Nullable<int> Zeitraum { get; set; }
         public Nullable<bool> Bewilligt { get; set; }
     
-        public virtual Kunden AlleKunde { get; set; }
+        public virtual Kunde AlleKunde { get; set; }
     }
 }

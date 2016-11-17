@@ -16,12 +16,12 @@ namespace KreditrechnerLAP.logic
     {
         public Titel()
         {
-            this.AlleKunde = new HashSet<Kunden>();
+            this.AlleKunde = new HashSet<Kunde>();
         }
     
         public int ID { get; set; }
         public string Bezeichnung { get; set; }
     
-        public virtual ICollection<Kunden> AlleKunde { get; set; }
+        public virtual ICollection<Kunde> AlleKunde { get; set; }
     }
 }

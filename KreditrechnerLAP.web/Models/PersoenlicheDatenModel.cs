@@ -6,11 +6,11 @@ using System.Web;
 
 namespace KreditrechnerLAP.web.Models
 {
-    public enum Geschlecht
-    {
-        Männlich,
-        Weiblich
-    }
+    //public enum Geschlecht
+    //{
+    //    Männlich,
+    //    Weiblich
+    //}
     public class PersoenlicheDatenModel
     {
         [Required(ErrorMessage = "Pflichtfeld")]

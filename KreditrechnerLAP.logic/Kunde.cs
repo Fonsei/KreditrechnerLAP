@@ -12,7 +12,7 @@ namespace KreditrechnerLAP.logic
     using System;
     using System.Collections.Generic;
     
-    public partial class Kunden
+    public partial class Kunde
     {
         public int ID { get; set; }
         public string Vorname { get; set; }

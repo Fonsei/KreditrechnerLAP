@@ -21,6 +21,6 @@ namespace KreditrechnerLAP.logic
         public Nullable<decimal> Unterhaltszahlung { get; set; }
         public Nullable<decimal> Ratenverpflichtung { get; set; }
     
-        public virtual Kunden AlleKunde { get; set; }
+        public virtual Kunde AlleKunde { get; set; }
     }
 }

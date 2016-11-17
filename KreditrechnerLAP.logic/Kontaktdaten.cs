@@ -24,6 +24,6 @@ namespace KreditrechnerLAP.logic
         public string Telefonnummer { get; set; }
     
         public virtual Ort AlleOrt { get; set; }
-        public virtual Kunden AlleKunde { get; set; }
+        public virtual Kunde AlleKunde { get; set; }
     }
 }

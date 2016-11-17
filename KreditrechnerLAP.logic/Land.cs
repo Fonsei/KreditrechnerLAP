@@ -16,14 +16,14 @@ namespace KreditrechnerLAP.logic
     {
         public Land()
         {
-            this.AlleKunde = new HashSet<Kunden>();
+            this.AlleKunde = new HashSet<Kunde>();
             this.AlleOrt = new HashSet<Ort>();
         }
     
         public string ID { get; set; }
         public string Bezeichnung { get; set; }
     
-        public virtual ICollection<Kunden> AlleKunde { get; set; }
+        public virtual ICollection<Kunde> AlleKunde { get; set; }
         public virtual ICollection<Ort> AlleOrt { get; set; }
     }
 }

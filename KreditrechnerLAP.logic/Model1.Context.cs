@@ -26,20 +26,20 @@ namespace KreditrechnerLAP.logic
         }
     
         public DbSet<Arbeitgeber> AlleArbeitgeber { get; set; }
-        public DbSet<Ausbildung> AlleAusbildung { get; set; }
+        public DbSet<Ausbildung> AlleAusbildungen { get; set; }
         public DbSet<Beschaeftigungsart> AlleBeschaeftigungsart { get; set; }
         public DbSet<Branche> AlleBranchen { get; set; }
         public DbSet<Einstellungen> tblEinstellungen { get; set; }
-        public DbSet<Familienstand> AlleFamilienstand { get; set; }
-        public DbSet<FinanzielleSituation> AlleFinanzielleSituation { get; set; }
-        public DbSet<IdentifikationsArt> AlleIdentifikationsArt { get; set; }
+        public DbSet<Familienstand> AlleFamilienStandsAngaben { get; set; }
+        public DbSet<FinanzielleSituation> AlleFinanzielleSituationen { get; set; }
+        public DbSet<IdentifikationsArt> AlleIdentifikationsArten { get; set; }
         public DbSet<Kontaktdaten> AlleKontaktdaten { get; set; }
         public DbSet<Konto> AlleKonto { get; set; }
-        public DbSet<Kredit> AlleKredit { get; set; }
-        public DbSet<Kunden> AlleKunde { get; set; }
-        public DbSet<Land> AlleLand { get; set; }
+        public DbSet<Kredit> AlleKredite { get; set; }
+        public DbSet<Kunde> AlleKunden { get; set; }
+        public DbSet<Land> AlleLänder { get; set; }
         public DbSet<Ort> AlleOrt { get; set; }
         public DbSet<Titel> AlleTitel { get; set; }
-        public DbSet<Wohnart> AlleWohnart { get; set; }
+        public DbSet<Wohnart> AlleWohnarten { get; set; }
     }
 }
