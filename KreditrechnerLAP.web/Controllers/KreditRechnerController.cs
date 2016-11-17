@@ -54,7 +54,6 @@ namespace KreditrechnerLAP.web.Controllers
         {
             Debug.WriteLine("POST - KreditRechnerController - Finanzielles");
             Debug.Indent();
-            Debugger.Break();
             if (ModelState.IsValid)
             {
                 //Business Logic
