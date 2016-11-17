@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KreditrechnerLAP.web", "KreditrechnerLAP.web\KreditrechnerLAP.web.csproj", "{20907C82-BB96-436F-BA00-CB3141ADE3AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KreditrechnerLAP.logic", "KreditrechnerLAP.logic\KreditrechnerLAP.logic.csproj", "{10CF0B76-43A8-4ABA-B042-493537E01F7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{20907C82-BB96-436F-BA00-CB3141ADE3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20907C82-BB96-436F-BA00-CB3141ADE3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20907C82-BB96-436F-BA00-CB3141ADE3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10CF0B76-43A8-4ABA-B042-493537E01F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CF0B76-43A8-4ABA-B042-493537E01F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CF0B76-43A8-4ABA-B042-493537E01F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CF0B76-43A8-4ABA-B042-493537E01F7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
