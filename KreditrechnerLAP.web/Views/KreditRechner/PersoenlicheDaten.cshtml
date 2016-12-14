@@ -1,4 +1,4 @@
-﻿@model KreditrechnerLAP.web.Models.PersönlicheDatenModel
+﻿@model KreditrechnerLAP.web.Models.PersoenlicheDatenModel
 
 @{
     ViewBag.Title = "PersoenlicheDaten";
@@ -9,6 +9,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.ID_Kunde)
     
     <div class="form-horizontal">
         <h4>PersönlicheDatenModel</h4>
@@ -25,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Titel, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Titel, new SelectList(Model.AlleTitelAngaben, "ID", "Bezeichnung"), "bitte wählen" , new{ htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Titel, new SelectList(Model.AlleTitelAngaben, "ID", "Bezeichnung") , "Bitte Wählen",  new{ htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Titel, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Staatsbuergerschaft, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Staatsbuergerschaft, new SelectList(Model.AlleStaatsbuergerschaftsAngaben , "ID", "Bezeichnung"), new{ htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Staatsbuergerschaft, new SelectList(Model.AlleStaatsbuergerschaftsAngaben , "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Staatsbuergerschaft, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,7 +73,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Familienstand, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Familienstand,new SelectList(Model.AlleFamilienStandAngaben, "ID" , "Bezeichnung"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Familienstand,new SelectList(Model.AlleFamilienStandAngaben, "ID" , "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Familienstand, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Wohnart, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Wohnart, new SelectList(Model.AlleWohnartAngaben, "ID", "Bezeichnung"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Wohnart, new SelectList(Model.AlleWohnartAngaben, "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Wohnart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,7 +89,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Bildung, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Bildung, new SelectList(Model.AlleBildungAngaben , "ID", "Bezeichnung"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Bildung, new SelectList(Model.AlleBildungAngaben , "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Bildung, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -96,7 +97,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Identifikationsart, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Identifikationsart, new SelectList(Model.AlleIdentifikationsAngaben , "ID", "Bezeichnung"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Identifikationsart, new SelectList(Model.AlleIdentifikationsAngaben , "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ID_Identifikationsart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -109,13 +110,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_Kunde, htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.ID_Kunde, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ID_Kunde, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-4 col-md-8">
@@ -130,10 +124,9 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="~/Content/js/bootstrap-datepicker.js" charset="UTF-8"></script>
-<script>
 
+<script>
+/*
     $(document).ready(function(){
          var dateNow = new Date();
          $('.datepicker1').datepicker('setStartDate', '1.1.1950',{
@@ -142,5 +135,7 @@
          });
 
     })
+   */
 </script>
+@Scripts.Render("~/bundles/jqueryval")
 }

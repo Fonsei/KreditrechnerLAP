@@ -1,45 +1,81 @@
-﻿using System;
+﻿using onlineKredit.web.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace KreditrechnerLAP.web.Models
 {
-    //public enum Geschlecht
-    //{
-    //    Männlich,
-    //    Weiblich
-    //}
+    public enum Geschlecht
+    {
+        [Display(Name = "Herr")]
+        Männlich,
+        [Display(Name = "Frau")]
+        Weiblich
+    }
+
     public class PersoenlicheDatenModel
     {
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Geschlecht")]
         [EnumDataType(typeof(Geschlecht))]
         public Geschlecht Geschlecht { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Vorname", Prompt = "Max")]
+        [Required]
+        [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
         public string Vorname { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Nachname", Prompt = "Mustermann")]
+        [Required]
+        [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
         public string Nachname { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Geburtsdatum", Prompt = "1988-08-08")]
+        [Display(Name = "Titel")]
+        public int? ID_Titel { get; set; }
+
+        [Display(Name = "Titel (nachstehend)")]
+        public int? ID_TitelNachstehend { get; set; }
+
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime Geburtsdatum { get; set; }
+        public DateTime GeburtsDatum { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Familienstand", Prompt = "Verheiratet")]
-        public string Familienstand { get; set; }
+        [Required]
+        [Display(Name = "Staatsbürgerschaft")]
+        public string ID_Staatsbuergerschaft { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Staatsbürger", Prompt = "Österreich")]
-        public string Staatsbuerger { get; set; }
+        [Display(Name = "Anzahl unterhaltspflichtiger Kinder")]
+        public int AnzahlUnterhaltspflichtigeKinder { get; set; }
 
+        [Required]
+        [Display(Name = "aktueller Familienstand")]
+        public int ID_Familienstand { get; set; }
+
+        [Required]
+        [Display(Name = "aktuelle Wohnsituation")]
+        public int ID_Wohnart { get; set; }
+
+        [Required]
+        [Display(Name = "aktuelle Bildung")]
+        public int ID_Bildung { get; set; }
+
+        [Required]
+        [Display(Name = "Identifikationstyp")]
+        public int ID_Identifikationsart { get; set; }
+
+        [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
+        [Display(Name = "Identifikations-Nummer")]
+        public string IdentifikationsNummer { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        [Required]
+        public int ID_Kunde { get; set; }
+
+        public List<FamilienStandModel> AlleFamilienStandAngaben { get; set; }
+        public List<StaatsbuergerschaftsModel> AlleStaatsbuergerschaftsAngaben { get; set; }
+        public List<WohnartModel> AlleWohnartAngaben { get; set; }
+        public List<BildungsModel> AlleBildungAngaben { get; set; }
+        public List<IdentifikationsModel> AlleIdentifikationsAngaben { get; set; }
+        public List<TitelModel> AlleTitelAngaben { get; set; }
+        public List<TitelNachstehendModel> AlleTitelNachstehendAngaben { get; set; }
 
     }
 }

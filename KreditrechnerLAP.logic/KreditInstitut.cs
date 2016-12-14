@@ -11,7 +11,7 @@ namespace KreditrechnerLAP.logic
     {
         public static Kunde ErzeugeKunde()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - ErzeugeKunde");
+            Debug.WriteLine("KreditInstitut - ErzeugeKunde");
             Debug.Indent();
 
             Kunde neuerKunde = null;
@@ -54,7 +54,7 @@ namespace KreditrechnerLAP.logic
         /// <returns>true wenn Eintragung gespeichert werden konnte und der Kunde existiert, ansonsten false</returns>
         public static bool KreditRahmenSpeichern(double kreditBetrag, int laufzeit, int idKunde)
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - KreditRahmenSpeichern");
+            Debug.WriteLine("KreditInstitut - KreditRahmenSpeichern");
             Debug.Indent();
 
             bool erfolgreich = false;
@@ -107,9 +107,9 @@ namespace KreditrechnerLAP.logic
         /// <param name="unterhaltsZahlungen">Zahlungen für Alimente und Unterhalt</param>
         /// <param name="idKunde">die id des Kunden</param>
         /// <returns>true wenn die finanzielle Situation erfolgreich gespeichert werden konnte, ansonsten false</returns>
-        public static bool FinanzielleSituationSpeichern(double nettoEinkommen, double ratenVerpflichtungen, double wohnkosten, double einkünfteAlimenteUnterhalt, double unterhaltsZahlungen, int idKunde)
+        public static bool FinanziellesSpeichern(double nettoEinkommen, double ratenVerpflichtungen, double wohnkosten, double einkünfteAlimenteUnterhalt, double unterhaltsZahlungen, int idKunde)
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - FinanzielleSituationSpeichern");
+            Debug.WriteLine("KreditInstitut - FinanzielleSituationSpeichern");
             Debug.Indent();
 
             bool erfolgreich = false;
@@ -157,12 +157,76 @@ namespace KreditrechnerLAP.logic
         }
 
         /// <summary>
+        /// Liefert alle Beschäftigungsarten zurück
+        /// </summary>
+        /// <returns>alle Beschäftigungsarten oder null bei einem fehler</returns>
+        public static List<Beschaeftigungsart> BeschaeftigungsartenLaden()
+        {
+            Debug.WriteLine("KreditInstitut - BeschaeftigungsartenLaden");
+            Debug.Indent();
+                List<Beschaeftigungsart>  alleBeschaeftigungen = null;
+
+                try
+                {
+                    using (var context = new dbKreditInstitutEntities())
+                    {
+                        alleBeschaeftigungen = context.AlleBeschaeftigungsart.ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine("Fehler in BeschaeftigungsartenLaden");
+                    Debug.Indent();
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
+                }
+
+
+            Debug.Unindent();
+            return alleBeschaeftigungen;
+        }
+
+        /// <summary>
+        /// Liefert alle Branchen zurück
+        /// </summary>
+        /// <returns>alle Branchen oder null bei einem fehler</returns>
+        public static List<Branche> BranchenAngabenLaden()
+        {
+            Debug.WriteLine("KreditInstitut - BranchenAngabenLaden");
+            Debug.Indent();
+            List<Branche> alleBranchen = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    alleBranchen = context.AlleBranchen.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Fehler in BeschaeftigungsartenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+
+            Debug.Unindent();
+            return alleBranchen;
+        }
+
+        /// <summary>
         /// Liefert alle Schulabschlüsse zurück
         /// </summary>
         /// <returns>alle Schulabschlüsse oder null bei einem Fehler</returns>
         public static List<Ausbildung> BildungsAngabenLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - BildungsAngabenLaden");
+            Debug.WriteLine("KreditInstitut - BildungsAngabenLaden");
             Debug.Indent();
 
             List<Ausbildung> alleAusbildungen = null;
@@ -193,7 +257,7 @@ namespace KreditrechnerLAP.logic
         /// <returns>alle FamilienStand oder null bei einem Fehler</returns>
         public static List<Familienstand> FamilienStandAngabenLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - FamilienStandAngabenLaden");
+            Debug.WriteLine("KreditInstitut - FamilienStandAngabenLaden");
             Debug.Indent();
 
             List<Familienstand> alleFamilienStandsAngaben = null;
@@ -224,16 +288,16 @@ namespace KreditrechnerLAP.logic
         /// <returns>alle Länder oder null bei einem Fehler</returns>
         public static List<Land> LaenderLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - LaenderLaden");
+            Debug.WriteLine("KreditInstitut - LaenderLaden");
             Debug.Indent();
 
-            List<Land> alleLänder = null;
+            List<Land> alleLaender = null;
 
             try
             {
                 using (var context = new dbKreditInstitutEntities())
                 {
-                    alleLänder = context.AlleLänder.ToList();
+                    alleLaender = context.AlleLänder.ToList();
                 }
             }
             catch (Exception ex)
@@ -246,7 +310,7 @@ namespace KreditrechnerLAP.logic
             }
 
             Debug.Unindent();
-            return alleLänder;
+            return alleLaender;
         }
 
         /// <summary>
@@ -255,7 +319,7 @@ namespace KreditrechnerLAP.logic
         /// <returns>alle Wohnarten oder null bei einem Fehler</returns>
         public static List<Wohnart> WohnartenLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - WohnartenLaden");
+            Debug.WriteLine("KreditInstitut - WohnartenLaden");
             Debug.Indent();
 
             List<Wohnart> alleWohnarten = null;
@@ -286,7 +350,7 @@ namespace KreditrechnerLAP.logic
         /// <returns>alle IdentifikatikonsArt oder null bei einem Fehler</returns>
         public static List<IdentifikationsArt> IdentifikiationsAngabenLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - IdentifikiationsAngabenLaden");
+            Debug.WriteLine("KreditInstitut - IdentifikiationsAngabenLaden");
             Debug.Indent();
 
             List<IdentifikationsArt> alleIdentifikationsArten = null;
@@ -311,13 +375,17 @@ namespace KreditrechnerLAP.logic
             return alleIdentifikationsArten;
         }
 
+
+
+
+
         /// <summary>
         /// Liefert alle Titel zurück
         /// </summary>
         /// <returns>alle Titel oder null bei einem Fehler</returns>
         public static List<Titel> TitelLaden()
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - TitelLaden");
+            Debug.WriteLine("KreditInstitut - TitelLaden");
             Debug.Indent();
 
             List<Titel> alleTitel = null;
@@ -344,9 +412,9 @@ namespace KreditrechnerLAP.logic
 
         
 
-        public static bool PersönlicheDatenSpeichern(int? idTitel, string geschlecht, DateTime geburtsDatum, string vorname, string nachname, int? idTitelNachstehend, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
+        public static bool PersoenlicheDatenSpeichern(int? idTitel, string geschlecht, DateTime geburtsDatum, string vorname, string nachname, int? idTitelNachstehend, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - PersönlicheDatenSpeichern");
+            Debug.WriteLine("KreditInstitut - PersönlicheDatenSpeichern");
             Debug.Indent();
 
             bool erfolgreich = false;
@@ -390,5 +458,212 @@ namespace KreditrechnerLAP.logic
             Debug.Unindent();
             return erfolgreich;
         }
+
+        public static Kunde KundeLaden(int idKunde)
+        {
+            Debug.WriteLine("KreditInstitut - KundeLaden");
+            Debug.Indent();
+
+            Kunde aktuellerKunde = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    aktuellerKunde = context.AlleKunden
+                        .Include("Arbeitgeber")
+                        .Include("Arbeitgeber.Beschaeftigungsart")
+                        .Include("Arbeitgeber.Branche")
+                        .Include("Familienstand")
+                        .Include("FinanzielleSituation")
+                        .Include("IdentifikationsArt")
+                        .Include("Kontaktdaten")
+                        .Include("Konto")
+                        .Include("Kredit")
+                        .Include("Ausbildung")
+                        .Include("Titel")
+                        .Include("Wohnart")
+                        .Include("Staatsbuerger")
+                        .Where(x => x.ID == idKunde).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KundeLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return aktuellerKunde;
+        }
+
+        public static bool ArbeitgeberDatenSpeichern(string arbeitgeberName, int beschaeftigungsArt, int branche, DateTime beschaeftigtSeit, int idKunde)
+        {
+            Debug.WriteLine("KreditInstitut - ArbeitgeberDatenSpeichern");
+            Debug.Indent();
+            bool erfolgreich = false;
+                try
+                {
+                    using(var context = new dbKreditInstitutEntities())
+                    {
+                    /// speichere zum Kunden die Angaben
+                    //Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if (aktKunde != null)
+                    {
+                        Arbeitgeber neuerArbeitgeber = new Arbeitgeber()
+                        {
+                            BeschaeftigtSeit = beschaeftigtSeit,
+                            FKBranche = branche,
+                            FKBeschaeftigungsart = beschaeftigungsArt,
+                            Firmenname = arbeitgeberName
+                        };
+                        aktKunde.Arbeitgeber = neuerArbeitgeber;
+                    }
+                   
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    Debug.WriteLine($"{anzahlZeilenBetroffen} Arbeitgeber gespeichert!");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine("Fehler in BildungsAngabenLaden");
+                    Debug.Indent();
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
+                }
+
+            Debug.Unindent();
+            return erfolgreich;
+        }
+
+        public static bool KontaktDatenSpeichern(string strasse, string hausnummer, int fkort, string email, string telefonnummer, int idKunde)
+        {
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+
+                    /// speichere zum Kunden die Angaben
+                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if (aktKunde != null)
+                    {
+
+                        Kontaktdaten kontakt = new Kontaktdaten() {
+                            Strasse = strasse,
+                            Hausnummer = hausnummer,
+                            FKOrt = fkort,
+                            Telefonnummer = telefonnummer,
+                            EMail = email
+                    };
+                        aktKunde.Kontaktdaten = kontakt;
+                        //aktKunde.Kontaktdaten.Strasse = strasse;
+                        //aktKunde.Kontaktdaten.Hausnummer = hausnummer;
+                        //aktKunde.Kontaktdaten.FKOrt = fkort;
+                        //aktKunde.Kontaktdaten.Telefonnummer = telefonnummer;
+                        //aktKunde.Kontaktdaten.EMail = email;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    Debug.WriteLine($"{anzahlZeilenBetroffen} KontaktDaten gespeichert!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontaktDatenSpeichern");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return erfolgreich;
+
+        }
+
+        public static bool KontoInformationenSpeichern(string iban, string bic, string bankname, int idKunde)
+        {
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+
+                    /// speichere zum Kunden die Angaben
+                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if (aktKunde != null)
+                    {
+                        Konto kontoinfo = new Konto()
+                        {
+                            Bankname = bankname,
+                            IBAN = iban,
+                            BIC = bic
+                        };
+
+                        aktKunde.Konto = kontoinfo;
+
+                        
+
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    Debug.WriteLine($"{anzahlZeilenBetroffen} KontoInformationen gespeichert!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontoInformationenSpeichern");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return erfolgreich;
+
+        }
+
+
+       
+
+        /// <summary>
+        /// Ladet alle Ort und gibt siwe zurück
+        /// </summary>
+        /// <returns>Gibt eine Liste von Orten zurück</returns>
+        public static List<Ort> LadeAlleOrte()
+        {
+            Debug.WriteLine("KreditInstitut - LadeAlleOrte");
+            Debug.Indent();
+
+            List<Ort> alleOrte = null;
+
+            using(var context = new dbKreditInstitutEntities())
+            {
+                alleOrte = context.AlleOrt.ToList();
+            }
+            Debug.Unindent();
+            return alleOrte;
+        }
+
+
+
     }
 }

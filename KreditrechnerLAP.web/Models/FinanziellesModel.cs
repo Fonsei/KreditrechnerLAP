@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace KreditrechnerLAP.web.Models
 {
@@ -22,7 +23,7 @@ namespace KreditrechnerLAP.web.Models
         [DefaultValue(0)]
         public double EinkünfteAlimente { get; set; }
 
-        [Display(Name = "Unterhalt den sie Erhalten")]
+        [Display(Name = "Zahlungen für Unterhalt, Alimente usw.")]
         [DefaultValue(0)]
         public double Unterhalt { get; set; } 
 
@@ -30,6 +31,10 @@ namespace KreditrechnerLAP.web.Models
         [Display(Name = "Monatliche raten(Kredit)")]
         [DefaultValue(0)]
         public double RatenVerpflichtung { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        [Required]
+        public int ID_Kunde { get; set; }
 
 
     }

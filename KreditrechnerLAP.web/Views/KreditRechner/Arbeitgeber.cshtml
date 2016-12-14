@@ -1,0 +1,80 @@
+﻿@model onlineKredit.web.Models.ArbeitgeberModel
+
+@{
+    ViewBag.Title = "Arbeitgeber";
+}
+
+<h2>Arbeitgeber</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.ID_Kunde)
+ 
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Arbeitgeber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Arbeitgeber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Arbeitgeber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_Beschaeftigungsart, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Beschaeftigungsart, new SelectList(Model.AlleBeschaeftigungsarten, "ID", "Bezeichnung"),"Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ID_Beschaeftigungsart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_Branche, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Branche, new SelectList(Model.AlleBranchen, "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ID_Branche, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Beschaeftigtseit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Beschaeftigtseit, new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;"} })
+                @Html.ValidationMessageFor(model => model.Beschaeftigtseit, "", new { @class = "text-danger" })
+                
+
+            </div>
+        </div>
+
+        
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+<script>
+    /*
+    $(document).ready(function () {
+         var dateNow = new Date();
+         $('.datepicker1').datepicker('setStartDate', '1.22.2016',{
+         });
+
+    })
+    */
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+}

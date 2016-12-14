@@ -1,0 +1,308 @@
+﻿@model onlineKredit.web.Models.ZusammenfassungModel
+
+@{
+    ViewBag.Title = "Zusammenfassung";
+}
+
+<h2>Zusammenfassung</h2>
+
+    
+    <hr />
+    <div>
+    <hr />
+        <h3>Kreditrahmen</h3>
+    <dl class="dl-horizontal">
+
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GewünschterBetrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GewünschterBetrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laufzeit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laufzeit)
+        </dd>
+</dl>
+        @*@Html.ActionLink("Ändern", "KreditRahmen", "KonsumKredit", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })*@
+        <hr />
+        <h3>Finanzielle Situation</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NettoEinkommen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NettoEinkommen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Wohnkosten)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Wohnkosten)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EinkünfteAlimenteUnterhalt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EinkünfteAlimenteUnterhalt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnterhaltsZahlungen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnterhaltsZahlungen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RatenVerpflichtungen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RatenVerpflichtungen)
+            </dd>
+            </dl>
+            <hr />
+            <h3>Persönliche daten</h3>
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Geschlecht)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Geschlecht)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Vorname)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Vorname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nachname)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nachname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Titel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Titel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TitelNachstehend)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TitelNachstehend)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GeburtsDatum)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GeburtsDatum)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Staatsbuergerschaft)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Staatsbuergerschaft)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnzahlUnterhaltspflichtigeKinder)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AnzahlUnterhaltspflichtigeKinder)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Familienstand)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Familienstand)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Wohnart)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Wohnart)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Bildung)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Bildung)
+                </dd>
+                </dl>
+                <hr />
+                <h3>Idendifikationsart</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Identifikationsart)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Identifikationsart)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IdentifikationsNummer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdentifikationsNummer)
+            </dd>
+            </dl>
+            <hr />
+            <h3>Arbeitgeber</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirmenName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirmenName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BeschäftigungsArt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BeschäftigungsArt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Branche)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Branche)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BeschäftigtSeit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BeschäftigtSeit)
+            </dd>
+            </dl>
+            <hr />
+            <h3>Kontaktdaten</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Strasse)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Strasse)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Hausnummer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Hausnummer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ort)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TelefonNummer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TelefonNummer)
+            </dd>
+            </dl>
+            <hr />
+            <h3>Konto Daten</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NeuesKonto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NeuesKonto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IBAN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IBAN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BIC)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BIC)
+            </dd>
+
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

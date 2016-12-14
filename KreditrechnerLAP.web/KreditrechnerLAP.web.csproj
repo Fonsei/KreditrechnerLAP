@@ -126,17 +126,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ArbeitgeberModel.cs" />
+    <Compile Include="Models\BeschaeftigungsArtModel.cs" />
     <Compile Include="Models\BildungsModel.cs" />
+    <Compile Include="Models\BrancheModel.cs" />
     <Compile Include="Models\FamilienStandModel.cs" />
     <Compile Include="Models\FinanzielleSituationModel.cs" />
     <Compile Include="Models\FinanziellesModel.cs" />
     <Compile Include="Models\IdentifikationsModel.cs" />
+    <Compile Include="Models\KontaktdatenModel.cs" />
     <Compile Include="Models\KontoInformationenModel.cs" />
-    <Compile Include="Models\KreditRahmenModel.cs" />
     <Compile Include="Models\KreditRechnerModel.cs" />
     <Compile Include="Models\NachschlageFeldModel.cs" />
+    <Compile Include="Models\OrteModel.cs" />
     <Compile Include="Models\PersoenlicheDatenModel.cs" />
-    <Compile Include="Models\PersönlicheDatenModel.cs" />
     <Compile Include="Models\StaatsbuergerschaftsModel.cs" />
     <Compile Include="Models\TitelModel.cs" />
     <Compile Include="Models\TitelNachstehendModel.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\chocolat.css" />
     <Content Include="Content\css\common.css" />
@@ -185,6 +188,7 @@
     <Content Include="Content\images\t4.jpg" />
     <Content Include="Content\js\bootstrap-3.1.1.min.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\js\easing.js" />
     <Content Include="Content\js\ion.rangeSlider.js" />
     <Content Include="Content\js\ion.rangeSlider.min.js" />
@@ -230,9 +234,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\KreditRechner\KreditRechner.cshtml" />
-    <Content Include="Views\KreditRechner\Finanzielles.cshtml" />
-    <Content Include="Views\KreditRechner\PersoenlicheDaten2.cshtml" />
     <Content Include="Views\KreditRechner\PersoenlicheDaten.cshtml" />
+    <Content Include="Views\KreditRechner\Arbeitgeber.cshtml" />
+    <Content Include="Views\KreditRechner\Finanzielles.cshtml" />
+    <Content Include="Views\KreditRechner\Zusammenfassung.cshtml" />
+    <Content Include="Views\KreditRechner\Kontaktdaten.cshtml" />
+    <Content Include="Views\KreditRechner\KontoInformationen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
