@@ -6,303 +6,297 @@
 
 <h2>Zusammenfassung</h2>
 
-    
-    <hr />
-    <div>
-    <hr />
-        <h3>Kreditrahmen</h3>
-    <dl class="dl-horizontal">
+<div class="container">
+    <div class="row">
+        <div>
 
+            @*Kreditrechner*@
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12"><h3>Kreditrahmen</h3></div>
 
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.GewünschterBetrag)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.GewünschterBetrag)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Laufzeit)
+            </div>
+            <div class="col-md-4">
+                @Html.DisplayFor(model => model.Laufzeit)
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "KreditRechner", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
 
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GewünschterBetrag)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GewünschterBetrag)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Laufzeit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Laufzeit)
-        </dd>
-</dl>
-        @*@Html.ActionLink("Ändern", "KreditRahmen", "KonsumKredit", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })*@
-        <hr />
-        <h3>Finanzielle Situation</h3>
-        <dl class="dl-horizontal">
-            <dt>
+            @*Finanzielles*@
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Finanzielle Situation</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.NettoEinkommen)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.NettoEinkommen)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Wohnkosten)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Wohnkosten)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.EinkünfteAlimenteUnterhalt)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.EinkünfteAlimenteUnterhalt)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.UnterhaltsZahlungen)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.UnterhaltsZahlungen)
-            </dd>
+            </div>
 
-            <dt>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.RatenVerpflichtungen)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-4">
                 @Html.DisplayFor(model => model.RatenVerpflichtungen)
-            </dd>
-            </dl>
-            <hr />
-            <h3>Persönliche daten</h3>
-
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Geschlecht)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Geschlecht)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Vorname)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Vorname)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Nachname)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Nachname)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Titel)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Titel)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.TitelNachstehend)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.TitelNachstehend)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.GeburtsDatum)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.GeburtsDatum)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Staatsbuergerschaft)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Staatsbuergerschaft)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.AnzahlUnterhaltspflichtigeKinder)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AnzahlUnterhaltspflichtigeKinder)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Familienstand)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Familienstand)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Wohnart)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Wohnart)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Bildung)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Bildung)
-                </dd>
-                </dl>
-                <hr />
-                <h3>Idendifikationsart</h3>
-        <dl class="dl-horizontal">
-            <dt>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "Finanzielles", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
+            @*Persönlich*@
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Persönliche daten</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Geschlecht)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Geschlecht)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Vorname)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Vorname)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+               @Html.DisplayNameFor(model => model.Nachname)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Nachname)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Titel)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Titel)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.GeburtsDatum)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.GeburtsDatum)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Staatsbuergerschaft)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Staatsbuergerschaft)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.AnzahlUnterhaltspflichtigeKinder)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.AnzahlUnterhaltspflichtigeKinder)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Familienstand)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Familienstand)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Wohnart)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Wohnart)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Bildung)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Bildung)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Identifikationsart)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Identifikationsart)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.IdentifikationsNummer)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.IdentifikationsNummer)
-            </dd>
-            </dl>
-            <hr />
-            <h3>Arbeitgeber</h3>
-        <dl class="dl-horizontal">
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.IdentifikationsNummer)
+            </div>
+            <div class="col-md-4">
+                @Html.DisplayFor(model => model.IdentifikationsNummer)
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "PersoenlicheDaten", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
+
+            @*Arbeitgeber*@
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Arbeitgeber</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.FirmenName)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.FirmenName)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.BeschäftigungsArt)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.BeschäftigungsArt)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Branche)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Branche)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.BeschäftigtSeit)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-4">
                 @Html.DisplayFor(model => model.BeschäftigtSeit)
-            </dd>
-            </dl>
-            <hr />
-            <h3>Kontaktdaten</h3>
-        <dl class="dl-horizontal">
-            <dt>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "Arbeitgeber", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
+
+            @*Kontaktdaten*@
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Kontaktdaten</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Strasse)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Strasse)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Hausnummer)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Hausnummer)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Ort)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Ort)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.PLZ)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Anzeige)
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.Mail)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.Mail)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.TelefonNummer)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-4">
                 @Html.DisplayFor(model => model.TelefonNummer)
-            </dd>
-            </dl>
-            <hr />
-            <h3>Konto Daten</h3>
-        <dl class="dl-horizontal">
-            <dt>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "Kontaktdaten", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
+
+            @*Kontoktdaten*@
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Kontodaten</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.NeuesKonto)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.NeuesKonto)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.BankName)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.BankName)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.IBAN)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-6">
                 @Html.DisplayFor(model => model.IBAN)
-            </dd>
-
-            <dt>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.BIC)
-            </dt>
-
-            <dd>
+            </div>
+            <div class="col-md-4">
                 @Html.DisplayFor(model => model.BIC)
-            </dd>
-
-        </dl>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Ändern", "KontoInformationen", "KreditRechner", new { id = Model.ID_Kunde }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

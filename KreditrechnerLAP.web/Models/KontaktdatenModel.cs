@@ -32,16 +32,33 @@ namespace KreditrechnerLAP.web.Models
 
         [Required]
         [Display(Name = "Emailadresse")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email adresse nicht Richtig")]
         public string Email { get; set; }
 
         [Required]
         [Display(Name = "Telefonnummer")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Nur Zahlen Erlaubt")]
         public string Telefonnummer { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [Required]
         public int ID_Kunde { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        [Required]
+        public int ID_PLZ { get; set; }
+
+        public string PLZ { get; set; }
+
+        public string Bezeichnung { get; set; }
+
+        public string Anzeige
+        {
+            get
+            {
+                return $"({PLZ}) {Bezeichnung}";
+            }
+        }
         public List<OrteModel> AlleOrte { get; set; }
 
     }

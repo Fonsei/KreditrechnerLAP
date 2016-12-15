@@ -42,9 +42,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Beschaeftigtseit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Beschaeftigtseit, new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;"} })
+                @Html.EditorFor(model => model.Beschaeftigtseit, new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;", placeholder = "mm.jjjj" } })
                 @Html.ValidationMessageFor(model => model.Beschaeftigtseit, "", new { @class = "text-danger" })
                 
+                @*<div class='input-group date'
+                     data-datepicker
+                     data-datepickermaxdate="now"
+                     data-datepickerformat="MM.YYYY"
+                     id="datePicker1">
+                    @Html.TextBoxFor(model => model.Beschaeftigtseit, new { @class = "form-control", placeholder = "mm.jjjj", id = "beschaeftigtSeit" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>*@
 
             </div>
         </div>
@@ -67,6 +77,11 @@
 @section Scripts {
 
 <script>
+    $(function () {
+        $('#datePicker1').datetimepicker({
+            format: 'MM.YYYY'
+        });
+    });
     /*
     $(document).ready(function () {
          var dateNow = new Date();

@@ -24,8 +24,8 @@ namespace onlineKredit.web.Models
         [Display(Name = "Branche")]
         public int ID_Branche { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "MM.yyyy")]
         [Display(Name = "Angestellt seit")]
         public DateTime Beschaeftigtseit { get; set; }
 

@@ -18,10 +18,22 @@ namespace KreditrechnerLAP.web.Controllers
         {
             Debug.WriteLine("GET - KreditRechnerController - KreditRechner");
             Debug.Indent();
-
+            KreditRechnerModel model = new KreditRechnerModel()
+            {
+                Kreditbetrag = 25000,  // default Werte
+                Zeitraum = 12   // default Werte
+            };
+            int id = -1;
+            if (Request.Cookies["idKunde"] != null && int.TryParse(Request.Cookies["idKunde"].Value, out id))
+            {
+                /// lade Daten aus Datenbank
+                Kredit wunsch = KreditInstitut.KreditRahmenLaden(id);
+                model.Kreditbetrag = (int)wunsch.Betrag.Value;
+                model.Zeitraum = wunsch.Zeitraum.Value;
+            }
 
             Debug.Unindent();
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -33,7 +45,7 @@ namespace KreditrechnerLAP.web.Controllers
             {
                 Kunde neuerKunde = KreditInstitut.ErzeugeKunde();
 
-                if (neuerKunde != null && KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Laufzeit, neuerKunde.ID))
+                if (neuerKunde != null && KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Zeitraum, neuerKunde.ID))
                 {
                     /// ich benötige für alle weiteren Schritte die ID 
                     /// des angelegten Kunden. Damit ich diese bei der nächsten Action 
@@ -54,6 +66,9 @@ namespace KreditrechnerLAP.web.Controllers
         {
             Debug.WriteLine("GET - KreditRechnerController - Finanzielles");
             Debug.Indent();
+
+
+            
             FinanziellesModel model = new FinanziellesModel()
             {
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
@@ -165,6 +180,22 @@ namespace KreditrechnerLAP.web.Controllers
                 AlleWohnartAngaben = alleWohnartAngaben,
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
+
+            Kunde kunde = KreditInstitut.PersoenlicheDatenLaden(model.ID_Kunde);
+            if(kunde != null)
+            {
+                model.Geschlecht = !string.IsNullOrEmpty(kunde.Geschlecht) && kunde.Geschlecht == "m" ? KreditrechnerLAP.web.Models.Geschlecht.Männlich : KreditrechnerLAP.web.Models.Geschlecht.Weiblich;
+                model.Vorname = kunde.Vorname;
+                model.Nachname = kunde.Nachname;
+                model.ID_Titel = kunde.FKTitel.HasValue ? kunde.FKTitel.Value : 0;
+                //model.GeburtsDatum = DateTime.Now;
+                model.ID_Staatsbuergerschaft = kunde.FKStaatsbuergerschaft;
+                model.ID_Familienstand = kunde.FKFamilienstand.HasValue ? kunde.FKFamilienstand.Value : 0;
+                model.ID_Wohnart = kunde.FKWohnart.HasValue ? kunde.FKWohnart.Value : 0;
+                model.ID_Bildung = kunde.FKAusbildung.HasValue ? kunde.FKAusbildung.Value : 0;
+                model.ID_Identifikationsart = kunde.FKIdentifikationsArt.HasValue ? kunde.FKIdentifikationsArt.Value : 0;
+                model.IdentifikationsNummer = kunde.Idendifikationsnummer;
+            }
             Debug.Unindent();
             return View(model);
         }
@@ -236,6 +267,15 @@ namespace KreditrechnerLAP.web.Controllers
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
 
+            Arbeitgeber arbeitgeberDaten = KreditInstitut.ArbeitgeberAngabenLaden(model.ID_Kunde);
+            if (arbeitgeberDaten != null)
+            {
+                //model.Beschaeftigtseit = arbeitgeberDaten.BeschaeftigtSeit.Value.ToString("MM.yyyy");
+                model.Arbeitgeber = arbeitgeberDaten.Firmenname;
+                model.ID_Beschaeftigungsart = arbeitgeberDaten.FKBeschaeftigungsart.Value; ;
+                model.ID_Branche = arbeitgeberDaten.FKBranche.Value;
+            }
+
             Debug.Unindent();
             return View(model);
         }
@@ -288,7 +328,19 @@ namespace KreditrechnerLAP.web.Controllers
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
 
-            
+            Kontaktdaten daten = KreditInstitut.KontaktDatenLaden(model.ID_Kunde);
+            if (daten != null)
+            {
+                model.Hausnummer = daten.Hausnummer;
+                model.Strasse = daten.Strasse;
+                model.Stiege = daten.Stiege;
+                model.Tuer = daten.Tuer;
+                model.ID_Ort = daten.FKOrt.Value;
+                model.Email = daten.EMail;
+                model.Telefonnummer = daten.Telefonnummer;
+            }
+
+
             Debug.Unindent();
             return View(model);
         }
@@ -305,6 +357,8 @@ namespace KreditrechnerLAP.web.Controllers
                 if (KreditInstitut.KontaktDatenSpeichern(
                     model.Strasse,
                     model.Hausnummer,
+                    model.Stiege,
+                    model.Tuer,
                     model.ID_Ort,
                     model.Email,
                     model.Telefonnummer,
@@ -331,6 +385,14 @@ namespace KreditrechnerLAP.web.Controllers
             {
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
+
+            Konto daten = KreditInstitut.KontoInformationenLaden(model.ID_Kunde);
+            if (daten != null)
+            {
+                model.Bankname = daten.Bankname;
+                model.BIC = daten.BIC;
+                model.IBAN = daten.IBAN;
+                model.KontoNeu = Convert.ToBoolean( daten.KontoNeu.Value);            }
             Debug.Unindent();
             return View(model);
         }
@@ -391,7 +453,7 @@ namespace KreditrechnerLAP.web.Controllers
             model.Vorname = aktKunde.Vorname;
             model.Nachname = aktKunde.Nachname;
             model.Titel = aktKunde.Titel?.Bezeichnung;
-            model.GeburtsDatum = DateTime.Now;
+            model.GeburtsDatum = aktKunde.Geburtsdatum;
             model.Staatsbuergerschaft = aktKunde.Staatsbuerger?.Bezeichnung;
             model.AnzahlUnterhaltspflichtigeKinder = -1;
             model.Familienstand = aktKunde.Familienstand?.Bezeichnung;
@@ -407,7 +469,8 @@ namespace KreditrechnerLAP.web.Controllers
 
             model.Strasse = aktKunde.Kontaktdaten?.Strasse;
             model.Hausnummer = aktKunde.Kontaktdaten?.Hausnummer;
-            //model.Ort = aktKunde.Kontaktdaten?.Ort.PLZ;
+            //model.PLZ = aktKunde.Kontaktdaten?.Ort.PLZ;
+            //model.Ort = aktKunde.Kontaktdaten?.Ort.Bezeichnung;
             model.Mail = aktKunde.Kontaktdaten?.EMail;
             model.TelefonNummer = aktKunde.Kontaktdaten?.Telefonnummer;
 
@@ -433,6 +496,7 @@ namespace KreditrechnerLAP.web.Controllers
         }
 
         /*#################################################################*/
+
 
     }
 }

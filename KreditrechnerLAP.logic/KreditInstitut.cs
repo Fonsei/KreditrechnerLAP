@@ -45,6 +45,8 @@ namespace KreditrechnerLAP.logic
             return neuerKunde;
         }
 
+        
+
         /// <summary>
         /// Speichert zu einer übergebenene ID_Kunde den Wunsch Kredit und dessen Laufzeit ab
         /// </summary>
@@ -95,6 +97,34 @@ namespace KreditrechnerLAP.logic
 
             Debug.Unindent();
             return erfolgreich;
+        }
+
+        public static Kredit KreditRahmenLaden(int id)
+        {
+            Debug.WriteLine("KreditInstitut - KreditRahmenLaden");
+            Debug.Indent();
+
+            Kredit wunsch = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    wunsch = context.AlleKredite.Where(x => x.ID == id).FirstOrDefault();
+                    Debug.WriteLine("KreditRahmen geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KreditRahmenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return wunsch;
         }
 
         /// <summary>
@@ -187,6 +217,8 @@ namespace KreditrechnerLAP.logic
             Debug.Unindent();
             return alleBeschaeftigungen;
         }
+
+        
 
         /// <summary>
         /// Liefert alle Branchen zurück
@@ -313,6 +345,8 @@ namespace KreditrechnerLAP.logic
             return alleLaender;
         }
 
+        
+
         /// <summary>
         /// Liefert alle Wohnarten zurück
         /// </summary>
@@ -375,6 +409,8 @@ namespace KreditrechnerLAP.logic
             return alleIdentifikationsArten;
         }
 
+        
+
 
 
 
@@ -410,7 +446,33 @@ namespace KreditrechnerLAP.logic
             return alleTitel;
         }
 
-        
+        public static Konto KontoInformationenLaden(int id_Kunde)
+        {
+            Debug.WriteLine("KreditInstitut - KontoInformationenLaden");
+            Debug.Indent();
+
+            Konto kontoDaten = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    kontoDaten = context.AlleKonto.Where(x => x.ID == id_Kunde).FirstOrDefault();
+                    Debug.WriteLine("KontoInformationen geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontoInformationenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return kontoDaten;
+        }
 
         public static bool PersoenlicheDatenSpeichern(int? idTitel, string geschlecht, DateTime geburtsDatum, string vorname, string nachname, int? idTitelNachstehend, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
         {
@@ -431,6 +493,7 @@ namespace KreditrechnerLAP.logic
                     {
                         aktKunde.Vorname = vorname;
                         aktKunde.Nachname = nachname;
+                        aktKunde.Geburtsdatum = geburtsDatum;
                         aktKunde.FKFamilienstand = idFamilienstand;
                         aktKunde.FKAusbildung = idBildung;
                         aktKunde.FKStaatsbuergerschaft = idStaatsbuergerschaft;
@@ -442,7 +505,7 @@ namespace KreditrechnerLAP.logic
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
-                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} PersönlicheDaten gespeichert!");
                 }
             }
@@ -457,6 +520,34 @@ namespace KreditrechnerLAP.logic
 
             Debug.Unindent();
             return erfolgreich;
+        }
+
+        public static Kunde PersoenlicheDatenLaden(int id)
+        {
+            Debug.WriteLine("KreditInstitut - PersönlicheDatenLaden");
+            Debug.Indent();
+
+            Kunde persönlicheDaten = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    persönlicheDaten = context.AlleKunden.Where(x => x.ID == id).FirstOrDefault();
+                    Debug.WriteLine("PersönlicheDatenLaden geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in PersönlicheDatenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return persönlicheDaten;
         }
 
         public static Kunde KundeLaden(int idKunde)
@@ -526,7 +617,7 @@ namespace KreditrechnerLAP.logic
                     }
                    
                     int anzahlZeilenBetroffen = context.SaveChanges();
-                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} Arbeitgeber gespeichert!");
                     }
                 }
@@ -544,7 +635,36 @@ namespace KreditrechnerLAP.logic
             return erfolgreich;
         }
 
-        public static bool KontaktDatenSpeichern(string strasse, string hausnummer, int fkort, string email, string telefonnummer, int idKunde)
+        public static Arbeitgeber ArbeitgeberAngabenLaden(int idKunde)
+        {
+            Debug.WriteLine("KreditInstitut - ArbeitgeberAngabenLaden");
+            Debug.Indent();
+
+            Arbeitgeber arbeitGeber = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    arbeitGeber = context.AlleArbeitgeber.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Debug.WriteLine("ArbeitgeberAngaben geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in ArbeitgeberAngabenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return arbeitGeber;
+        }
+
+
+        public static bool KontaktDatenSpeichern(string strasse, string hausnummer, string stiege, string tuer, int fkort, string email, string telefonnummer, int idKunde)
         {
 
             bool erfolgreich = false;
@@ -560,23 +680,22 @@ namespace KreditrechnerLAP.logic
                     if (aktKunde != null)
                     {
 
+
                         Kontaktdaten kontakt = new Kontaktdaten() {
                             Strasse = strasse,
                             Hausnummer = hausnummer,
+                            Stiege =stiege,
+                            Tuer = tuer,
                             FKOrt = fkort,
                             Telefonnummer = telefonnummer,
                             EMail = email
                     };
                         aktKunde.Kontaktdaten = kontakt;
-                        //aktKunde.Kontaktdaten.Strasse = strasse;
-                        //aktKunde.Kontaktdaten.Hausnummer = hausnummer;
-                        //aktKunde.Kontaktdaten.FKOrt = fkort;
-                        //aktKunde.Kontaktdaten.Telefonnummer = telefonnummer;
-                        //aktKunde.Kontaktdaten.EMail = email;
+
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
-                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} KontaktDaten gespeichert!");
                 }
             }
@@ -592,6 +711,34 @@ namespace KreditrechnerLAP.logic
             Debug.Unindent();
             return erfolgreich;
 
+        }
+
+        public static Kontaktdaten KontaktDatenLaden(int idKunde)
+        {
+            Debug.WriteLine("KreditInstitut - KontaktDatenLaden");
+            Debug.Indent();
+
+            Kontaktdaten daten = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    daten = context.AlleKontaktdaten.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Debug.WriteLine("KontaktDaten geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontaktDatenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return daten;
         }
 
         public static bool KontoInformationenSpeichern(string iban, string bic, string bankname, int idKunde)
@@ -623,7 +770,7 @@ namespace KreditrechnerLAP.logic
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
-                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} KontoInformationen gespeichert!");
                 }
             }

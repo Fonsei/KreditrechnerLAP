@@ -10,26 +10,36 @@ namespace KreditrechnerLAP.web.Models
 {
     public class FinanziellesModel
     {
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Monatliches Netto Einkommen")]
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
+        [Range(500, 10000, ErrorMessage = "Wert muss zwischen 500 und 10000 liegen")]
+        [Display(Name = "Netto-Einkommen (14x jährlich)")]
         public double NettoEinkommen { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Wohnkosten(Miete,Strom,Heizung)")]
-        [DefaultValue(0)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
+        [Range(0, 10000, ErrorMessage = "Wert muss zwischen 0 und 10000 liegen")]
+        [Display(Name = "Wohnkosten (Miete, Heizung, Strom)")]
         public double Wohnkosten { get; set; }
 
-        [Display(Name = "Aliemente die Sie bekommen")]
-        [DefaultValue(0)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
+        [Range(0, 10000, ErrorMessage = "Wert muss zwischen 0 und 10000 liegen")]
+        [Display(Name = "Einkünfte aus Alimenten, Unterhalte usw.")]
         public double EinkünfteAlimente { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
+        [Range(0, 10000, ErrorMessage = "Wert muss zwischen 0 und 10000 liegen")]
         [Display(Name = "Zahlungen für Unterhalt, Alimente usw.")]
-        [DefaultValue(0)]
-        public double Unterhalt { get; set; } 
+        public double Unterhalt { get; set; }
 
 
-        [Display(Name = "Monatliche raten(Kredit)")]
-        [DefaultValue(0)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
+        [Range(0, 10000, ErrorMessage = "Wert muss zwischen 0 und 10000 liegen")]
+        [Display(Name = "Raten-Verpflichtungen")]
         public double RatenVerpflichtung { get; set; }
 
         [HiddenInput(DisplayValue = false)]

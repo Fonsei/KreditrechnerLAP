@@ -15,8 +15,7 @@ namespace KreditrechnerLAP.web.Models
         [Display(Name = "Frau")]
         Weiblich
     }
-
-    public class PersoenlicheDatenModel
+    public class PersönlicheDatenModel
     {
         [EnumDataType(typeof(Geschlecht))]
         public Geschlecht Geschlecht { get; set; }
@@ -35,7 +34,7 @@ namespace KreditrechnerLAP.web.Models
         [Display(Name = "Titel (nachstehend)")]
         public int? ID_TitelNachstehend { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy/dd/MM}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime GeburtsDatum { get; set; }
 
         [Required]
@@ -76,6 +75,5 @@ namespace KreditrechnerLAP.web.Models
         public List<IdentifikationsModel> AlleIdentifikationsAngaben { get; set; }
         public List<TitelModel> AlleTitelAngaben { get; set; }
         public List<TitelNachstehendModel> AlleTitelNachstehendAngaben { get; set; }
-
     }
 }

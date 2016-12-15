@@ -19,7 +19,7 @@ namespace KreditrechnerLAP.web.Models
         [Required(ErrorMessage = "Pflichtfeld")]
         [Display(Name = "Gewünschte Rate")]
         [Range(12, 120, ErrorMessage = "Rate muss zwichen 12 und 120 Monate sein")]
-        public int Laufzeit { get; set; }
+        public int Zeitraum { get; set; }
 
         
         public double Zinsen { get; set; }

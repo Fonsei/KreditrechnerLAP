@@ -25,10 +25,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Laufzeit, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.Zeitraum, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Laufzeit, new { htmlAttributes = new {@id="example_id2", @class = "form-control",@onChange="berechnen(); Zinsen1();" } })
-                @Html.ValidationMessageFor(model => model.Laufzeit, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Zeitraum, new { htmlAttributes = new {@id="example_id2", @class = "form-control",@onChange="berechnen(); Zinsen1();" } })
+                @Html.ValidationMessageFor(model => model.Zeitraum, "", new { @class = "text-danger" })
             </div>
         </div>
 
