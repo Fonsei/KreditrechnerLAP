@@ -1,4 +1,5 @@
-﻿using KreditrechnerLAP.logic;
+﻿using KreditrechnerLAP.freigabe;
+using KreditrechnerLAP.logic;
 using KreditrechnerLAP.web.Models;
 using onlineKredit.web.Models;
 using System;
@@ -67,12 +68,21 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.WriteLine("GET - KreditRechnerController - Finanzielles");
             Debug.Indent();
 
-
-            
             FinanziellesModel model = new FinanziellesModel()
             {
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
+
+            FinanzielleSituation finanziellesituation = KreditInstitut.FinanzielleSituationAngabenLaden(model.ID_Kunde);
+            if (finanziellesituation != null)
+            {
+                model.NettoEinkommen = (double)finanziellesituation.NettoEinkommen;
+                model.RatenVerpflichtung = (double)finanziellesituation.Ratenverpflichtung;
+                model.Unterhalt = (double)finanziellesituation.Unterhaltszahlung; ;
+                model.Wohnkosten = (double)finanziellesituation.Wohnkosten;
+            }
+
+                      
 
             Debug.Unindent();
             return View(model);
@@ -182,20 +192,24 @@ namespace KreditrechnerLAP.web.Controllers
             };
 
             Kunde kunde = KreditInstitut.PersoenlicheDatenLaden(model.ID_Kunde);
-            if(kunde != null)
+            if (kunde != null)
             {
                 model.Geschlecht = !string.IsNullOrEmpty(kunde.Geschlecht) && kunde.Geschlecht == "m" ? KreditrechnerLAP.web.Models.Geschlecht.Männlich : KreditrechnerLAP.web.Models.Geschlecht.Weiblich;
                 model.Vorname = kunde.Vorname;
                 model.Nachname = kunde.Nachname;
                 model.ID_Titel = kunde.FKTitel.HasValue ? kunde.FKTitel.Value : 0;
-                //model.GeburtsDatum = DateTime.Now;
+                model.GeburtsDatum = DateTime.Now;
                 model.ID_Staatsbuergerschaft = kunde.FKStaatsbuergerschaft;
                 model.ID_Familienstand = kunde.FKFamilienstand.HasValue ? kunde.FKFamilienstand.Value : 0;
                 model.ID_Wohnart = kunde.FKWohnart.HasValue ? kunde.FKWohnart.Value : 0;
                 model.ID_Bildung = kunde.FKAusbildung.HasValue ? kunde.FKAusbildung.Value : 0;
                 model.ID_Identifikationsart = kunde.FKIdentifikationsArt.HasValue ? kunde.FKIdentifikationsArt.Value : 0;
                 model.IdentifikationsNummer = kunde.Idendifikationsnummer;
+                model.Zujung = false;
             }
+            else
+                kunde = new Kunde();
+
             Debug.Unindent();
             return View(model);
         }
@@ -208,22 +222,97 @@ namespace KreditrechnerLAP.web.Controllers
             
             if (ModelState.IsValid)
             {
-                if (KreditInstitut.PersoenlicheDatenSpeichern(
-                                               model.ID_Titel,
-                                               model.Geschlecht == Geschlecht.Männlich ? "m" : "w",
-                                               model.GeburtsDatum,
-                                               model.Vorname,
-                                               model.Nachname,
-                                               model.ID_TitelNachstehend,
-                                               model.ID_Bildung,
-                                               model.ID_Familienstand,
-                                               model.ID_Identifikationsart,
-                                               model.IdentifikationsNummer,
-                                               model.ID_Staatsbuergerschaft,
-                                               model.ID_Wohnart,
-                                               model.ID_Kunde))
+                int alter = KreditInstitut.Alter(model.GeburtsDatum);
+                if (alter > 17)
                 {
-                    return RedirectToAction("Arbeitgeber");
+                   
+                    if (KreditInstitut.PersoenlicheDatenSpeichern(
+                                                   model.ID_Titel,
+                                                   model.Geschlecht == Geschlecht.Männlich ? "m" : "w",
+                                                   model.AnzahlUnterhaltspflichtigeKinder,
+                                                   model.GeburtsDatum,
+                                                   model.Vorname,
+                                                   model.Nachname,
+                                                   model.ID_TitelNachstehend,
+                                                   model.ID_Bildung,
+                                                   model.ID_Familienstand,
+                                                   model.ID_Identifikationsart,
+                                                   model.IdentifikationsNummer,
+                                                   model.ID_Staatsbuergerschaft,
+                                                   model.ID_Wohnart,
+                                                   model.ID_Kunde))
+                    {
+                        model.Zujung = false;
+                        return RedirectToAction("Arbeitgeber");
+                    }
+                }
+                else
+                {
+                    List<BildungsModel> alleBildungsAngaben = new List<BildungsModel>();
+                    List<FamilienStandModel> alleFamilienStandAngaben = new List<FamilienStandModel>();
+                    List<IdentifikationsModel> alleIdentifikationsAngaben = new List<IdentifikationsModel>();
+                    List<StaatsbuergerschaftsModel> alleStaatsbuergerschaftsAngaben = new List<StaatsbuergerschaftsModel>();
+                    List<TitelModel> alleTitelAngaben = new List<TitelModel>();
+                    List<WohnartModel> alleWohnartAngaben = new List<WohnartModel>();
+
+                    /// Lade Daten aus Logic
+                    foreach (var bildungsAngabe in KreditInstitut.BildungsAngabenLaden())
+                    {
+                        alleBildungsAngaben.Add(new BildungsModel()
+                        {
+                            ID = bildungsAngabe.ID.ToString(),
+                            Bezeichnung = bildungsAngabe.Bezeichnung
+                        });
+                    }
+
+                    foreach (var familienStand in KreditInstitut.FamilienStandAngabenLaden())
+                    {
+                        alleFamilienStandAngaben.Add(new FamilienStandModel()
+                        {
+                            ID = familienStand.ID.ToString(),
+                            Bezeichnung = familienStand.Bezeichnung
+                        });
+                    }
+                    foreach (var identifikationsAngabe in KreditInstitut.IdentifikiationsAngabenLaden())
+                    {
+                        alleIdentifikationsAngaben.Add(new IdentifikationsModel()
+                        {
+                            ID = identifikationsAngabe.ID.ToString(),
+                            Bezeichnung = identifikationsAngabe.Bezeichnung
+                        });
+                    }
+                    foreach (var land in KreditInstitut.LaenderLaden())
+                    {
+                        alleStaatsbuergerschaftsAngaben.Add(new StaatsbuergerschaftsModel()
+                        {
+                            ID = land.ID,
+                            Bezeichnung = land.Bezeichnung
+                        });
+                    }
+                    foreach (var titel in KreditInstitut.TitelLaden())
+                    {
+                        alleTitelAngaben.Add(new TitelModel()
+                        {
+                            ID = titel.ID.ToString(),
+                            Bezeichnung = titel.Bezeichnung
+                        });
+                    }
+                    foreach (var wohnart in KreditInstitut.WohnartenLaden())
+                    {
+                        alleWohnartAngaben.Add(new WohnartModel()
+                        {
+                            ID = wohnart.ID.ToString(),
+                            Bezeichnung = wohnart.Bezeichnung
+                        });
+                    }
+
+                    model.AlleBildungAngaben = alleBildungsAngaben;
+                    model.AlleFamilienStandAngaben = alleFamilienStandAngaben;
+                    model.AlleIdentifikationsAngaben = alleIdentifikationsAngaben;
+                    model.AlleStaatsbuergerschaftsAngaben = alleStaatsbuergerschaftsAngaben;
+                    model.AlleTitelAngaben = alleTitelAngaben;
+                    model.AlleWohnartAngaben = alleWohnartAngaben;
+                    model.Zujung = true;
                 }
             }
 
@@ -263,14 +352,15 @@ namespace KreditrechnerLAP.web.Controllers
             ArbeitgeberModel model = new ArbeitgeberModel()
             {
                 AlleBeschaeftigungsarten = alleBeschaeftigungen,
-                AlleBranchen = alleBranchen ,
+                AlleBranchen = alleBranchen,
+                Beschaeftigtseit = DateTime.Now,
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
 
             Arbeitgeber arbeitgeberDaten = KreditInstitut.ArbeitgeberAngabenLaden(model.ID_Kunde);
             if (arbeitgeberDaten != null)
             {
-                //model.Beschaeftigtseit = arbeitgeberDaten.BeschaeftigtSeit.Value.ToString("MM.yyyy");
+                model.Beschaeftigtseit = arbeitgeberDaten.BeschaeftigtSeit.Value.Date;
                 model.Arbeitgeber = arbeitgeberDaten.Firmenname;
                 model.ID_Beschaeftigungsart = arbeitgeberDaten.FKBeschaeftigungsart.Value; ;
                 model.ID_Branche = arbeitgeberDaten.FKBranche.Value;
@@ -392,7 +482,7 @@ namespace KreditrechnerLAP.web.Controllers
                 model.Bankname = daten.Bankname;
                 model.BIC = daten.BIC;
                 model.IBAN = daten.IBAN;
-                model.KontoNeu = Convert.ToBoolean( daten.KontoNeu.Value);            }
+                model.KontoNeu = Convert.ToBoolean( daten.KontoNeu);            }
             Debug.Unindent();
             return View(model);
         }
@@ -405,6 +495,12 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.Indent();
             if (ModelState.IsValid)
             {
+                if (model.KontoNeu)
+                {
+                    model.Bankname = "Deutschebank AG";
+                    model.IBAN = "Neuer IBAN";
+                    model.BIC =  "Neuer BIC";
+                }
                 //Business Logic
                 if (KreditInstitut.KontoInformationenSpeichern(
                     model.IBAN,
@@ -455,7 +551,7 @@ namespace KreditrechnerLAP.web.Controllers
             model.Titel = aktKunde.Titel?.Bezeichnung;
             model.GeburtsDatum = aktKunde.Geburtsdatum;
             model.Staatsbuergerschaft = aktKunde.Staatsbuerger?.Bezeichnung;
-            model.AnzahlUnterhaltspflichtigeKinder = -1;
+            model.AnzahlUnterhaltspflichtigeKinder = aktKunde.Kinder;
             model.Familienstand = aktKunde.Familienstand?.Bezeichnung;
             model.Wohnart = aktKunde.Wohnart?.Bezeichnung;
             model.Bildung = aktKunde.Ausbildung?.Bezeichnung;
@@ -469,12 +565,13 @@ namespace KreditrechnerLAP.web.Controllers
 
             model.Strasse = aktKunde.Kontaktdaten?.Strasse;
             model.Hausnummer = aktKunde.Kontaktdaten?.Hausnummer;
-            //model.PLZ = aktKunde.Kontaktdaten?.Ort.PLZ;
-            //model.Ort = aktKunde.Kontaktdaten?.Ort.Bezeichnung;
+            //model.Ort = aktKunde.Kontaktdaten.FKOrt.Value;
+            model.PLZ = aktKunde.Kontaktdaten?.Ort.PLZ;
+            model.Ort = aktKunde.Kontaktdaten?.Ort.Bezeichnung;
             model.Mail = aktKunde.Kontaktdaten?.EMail;
             model.TelefonNummer = aktKunde.Kontaktdaten?.Telefonnummer;
 
-            //model.NeuesKonto = (bool)aktKunde.Konto?.KontoNeu.Value;
+            //model.NeuesKonto = (bool)aktKunde.Konto?.KontoNeu;
             model.BankName = aktKunde.Konto?.Bankname;
             model.IBAN = aktKunde.Konto?.IBAN;
             model.BIC = aktKunde.Konto?.BIC;
@@ -496,7 +593,44 @@ namespace KreditrechnerLAP.web.Controllers
         }
 
         /*#################################################################*/
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Beantragen(int id, bool? bestätigt)
+        {
+            if (bestätigt.HasValue && bestätigt.Value)
+            {
+                Debug.WriteLine("POST - KonsumKredit - Bestätigung");
+                Debug.Indent();
 
 
+                //int idKunde = int.Parse(Request.Cookies["idKunde"].Value);
+                Kunde aktKunde = KreditInstitut.KundeLaden(id);
+                Response.Cookies.Remove("idKunde");
+
+                bool istFreigegeben = Kreditfreigeben.FreigabeErteilt(
+                                                          aktKunde.Geschlecht,
+                                                            aktKunde.Vorname,
+                                                            aktKunde.Nachname,
+                                                            aktKunde.Familienstand.Bezeichnung,
+                                                            (double)aktKunde.FinanzielleSituation.NettoEinkommen,
+                                                            (double)aktKunde.FinanzielleSituation.Wohnkosten,
+                                                            (double)aktKunde.FinanzielleSituation.EinkünfteAlimente,
+                                                            (double)aktKunde.FinanzielleSituation.Unterhaltszahlung,
+                                                            (double)aktKunde.FinanzielleSituation.Ratenverpflichtung);
+
+                /// Rüfe Service/DLL auf und prüfe auf Kreditfreigabe
+                Debug.WriteLine($"Kreditfreigabe {(istFreigegeben ? "" : "nicht")}erteilt!");
+
+                Debug.Unindent();
+                return RedirectToAction("Index", "Bestaetigen", new { erfolgreich = istFreigegeben });
+
+            }
+            else
+            {
+                return RedirectToAction("Zusammenfassung");
+            }
+        }
+        
     }
 }

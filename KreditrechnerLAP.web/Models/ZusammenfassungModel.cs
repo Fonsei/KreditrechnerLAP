@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KreditrechnerLAP.web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -73,9 +74,19 @@ namespace onlineKredit.web.Models
         public string Hausnummer { get; set; }
         public string Ort { get; set; }
         public string PLZ { get; set; }
-        public string Anzeige { get; set; }
+        public string Bezeichnung { get; set; }
         public string Mail { get; set; }
         public string TelefonNummer { get; set; }
+
+        public string Anzeige
+        {
+            get
+            {
+                return $"({PLZ}) {Ort}";
+            }
+        }
+
+        
         #endregion
 
         #region KontoInformationen

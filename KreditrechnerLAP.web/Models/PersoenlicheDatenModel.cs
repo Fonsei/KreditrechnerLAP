@@ -35,7 +35,8 @@ namespace KreditrechnerLAP.web.Models
         [Display(Name = "Titel (nachstehend)")]
         public int? ID_TitelNachstehend { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy/dd/MM}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime GeburtsDatum { get; set; }
 
         [Required]
@@ -66,8 +67,35 @@ namespace KreditrechnerLAP.web.Models
         public string IdentifikationsNummer { get; set; }
 
         [HiddenInput(DisplayValue = false)]
+        public bool Zujung { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         [Required]
         public int ID_Kunde { get; set; }
+
+        //[Required]
+        //[ValidBirthDate(ErrorMessage = "Test")]
+        //[Display(Name = "Geburtsdatum")]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //public DateTime GeburtsDatum { get; set; }
+
+        //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+        //public sealed class ValidBirthDate : ValidationAttribute
+        //{
+        //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        //    {
+        //        if (value != null)
+        //        {
+        //            DateTime _birthJoin = Convert.ToDateTime(value);
+        //            if (_birthJoin > DateTime.Now)
+        //            {
+        //                return new ValidationResult("Birth date can not be greater than current date.");
+        //            }
+        //        }
+        //        return ValidationResult.Success;
+        //    }
+        //}
 
         public List<FamilienStandModel> AlleFamilienStandAngaben { get; set; }
         public List<StaatsbuergerschaftsModel> AlleStaatsbuergerschaftsAngaben { get; set; }

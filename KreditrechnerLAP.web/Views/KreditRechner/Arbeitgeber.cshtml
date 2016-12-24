@@ -42,20 +42,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Beschaeftigtseit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Beschaeftigtseit, new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;", placeholder = "mm.jjjj" } })
+                @Html.EditorFor(model => model.Beschaeftigtseit, "{0:yyyy-MM}", new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;" } })
                 @Html.ValidationMessageFor(model => model.Beschaeftigtseit, "", new { @class = "text-danger" })
-                
-                @*<div class='input-group date'
-                     data-datepicker
-                     data-datepickermaxdate="now"
-                     data-datepickerformat="MM.YYYY"
-                     id="datePicker1">
-                    @Html.TextBoxFor(model => model.Beschaeftigtseit, new { @class = "form-control", placeholder = "mm.jjjj", id = "beschaeftigtSeit" })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>*@
-
             </div>
         </div>
 
@@ -64,7 +52,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Weiter" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -77,19 +65,16 @@
 @section Scripts {
 
 <script>
-    $(function () {
-        $('#datePicker1').datetimepicker({
-            format: 'MM.YYYY'
-        });
-    });
-    /*
     $(document).ready(function () {
-         var dateNow = new Date();
-         $('.datepicker1').datepicker('setStartDate', '1.22.2016',{
-         });
+        var dateNow = new Date();
+        $('.datepicker1').datepicker({
+            language: 'de',
+            format: 'yyyy-mm',
+        });
 
     })
-    */
+
+    
 </script>
 @Scripts.Render("~/bundles/jqueryval")
 }

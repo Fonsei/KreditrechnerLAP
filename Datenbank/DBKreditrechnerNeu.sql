@@ -92,6 +92,7 @@ CREATE TABLE tblKunde(
 	Vorname VARCHAR(30) NOT NULL,
 	Nachname VARCHAR(30) NOT NULL,
 	Geburtsdatum DATE NOT NULL,
+	Kinder INT NOT NULL,
 	FKTitel INT FOREIGN KEY REFERENCES tblTitel NULL,
 	FKArbeitgeber INT FOREIGN KEY REFERENCES tblArbeitgeber NULL,
 	FKFamilienstand INT FOREIGN KEY REFERENCES tblFamilienstand NULL,
@@ -180,7 +181,8 @@ INSERT INTO tblFamilienstand(Familienstand)
 VALUES
 ('Ledig'),
 ('Verheiratet'),
-('Geschieden')
+('Verwitwet'),
+('in Partnerschaft')
 GO
 
 INSERT INTO tblWohnart(Wohnart)

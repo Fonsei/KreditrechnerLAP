@@ -1,4 +1,11 @@
 
+
+
+input::-webkit-calendar-picker-indicator{
+    display:none;
+}
+
+
 .c{
     text-align:center;
 }
@@ -2831,3 +2838,17 @@ input[type="text"]{
         border:none;
         background-color:#ececec;
     }
+input[type="text"], input[type="email"] {
+    border: none;
+    outline: none;
+    border-top: none;
+    padding: none;
+    width: 48%;
+}
+input[type="email"] {
+    margin-left: 0px;
+}
+
+.breite48{
+    width:48%;
+}

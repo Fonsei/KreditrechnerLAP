@@ -44,6 +44,8 @@ public partial class Kunde
 
     public Nullable<int> FKArbeitgeber { get; set; }
 
+    public int Kinder { get; set; }
+
 
 
     public virtual Ausbildung Ausbildung { get; set; }

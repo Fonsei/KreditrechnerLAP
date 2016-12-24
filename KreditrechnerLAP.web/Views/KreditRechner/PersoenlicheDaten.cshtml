@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "PersoenlicheDaten";
 }
-
+<h1>Persönlichedaten</h1>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.HiddenFor(x=>x.ID_Kunde)
     
     <div class="form-horizontal">
-        <h4>PersönlicheDatenModel</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -49,15 +49,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GeburtsDatum, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.EditorFor(model => model.GeburtsDatum, new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;" , @value = DateTime.Now.Date} })
+                @Html.EditorFor(model => model.GeburtsDatum,"{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "datepicker1 breite48", @id = "datepicker1", onchange = "ueber18()", @style = "width:48%;", @value = DateTime.Now.Date} })
                 @Html.ValidationMessageFor(model => model.GeburtsDatum, "", new { @class = "text-danger" })
+                <span id="display_error" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ID_Staatsbuergerschaft, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.DropDownListFor(model => model.ID_Staatsbuergerschaft, new SelectList(Model.AlleStaatsbuergerschaftsAngaben , "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ID_Staatsbuergerschaft, new SelectList(Model.AlleStaatsbuergerschaftsAngaben , "ID", "Bezeichnung"), "Bitte Wählen", new { htmlAttributes = new { @class = "form-control", @style= "width:48%;" } })
                 @Html.ValidationMessageFor(model => model.ID_Staatsbuergerschaft, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,16 +127,44 @@
 @section Scripts {
 
 <script>
-/*
+
     $(document).ready(function(){
          var dateNow = new Date();
-         $('.datepicker1').datepicker('setStartDate', '1.1.1950',{
+         $('.datepicker1').datepicker({
              language: 'de',
-            format: 'yyyy-MM-dd', 
+            format: 'yyyy-mm-dd',
          });
 
+
     })
-   */
+
+    function ueber18() {
+        var gebJahr = document.getElementById("datepicker1").value.substring(0, 4);
+        var gebmonat = document.getElementById("datepicker1").value.substring(5,7);
+        var gebtag = document.getElementById("datepicker1").value.substring(8,10);
+        var mindestalter = @DateTime.Now.Year -18;
+        var monat = @DateTime.Now.Month;
+        var tag = @DateTime.Now.Day;
+
+        if (gebJahr > mindestalter) {
+            if(gebmonat <= monat){
+                if( gebtag <= tag){
+                    $('#display_error').html('Mindestalter 18 Jahre');
+                    
+                    }
+            }
+            
+
+        }
+        else {
+            $('#display_error').html('');
+        }
+        console.log(monat +' '+ gebmonat + ' '+ gebtag);
+    }
+
+
+
+
 </script>
 @Scripts.Render("~/bundles/jqueryval")
 }

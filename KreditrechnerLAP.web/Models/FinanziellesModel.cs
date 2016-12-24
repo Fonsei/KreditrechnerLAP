@@ -14,7 +14,7 @@ namespace KreditrechnerLAP.web.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [DataType(DataType.Currency, ErrorMessage = "Bitte eine Zahl eingeben")]
         [Range(500, 10000, ErrorMessage = "Wert muss zwischen 500 und 10000 liegen")]
-        [Display(Name = "Netto-Einkommen (14x jährlich)")]
+        [Display(Name = "Monatliches Netto-Einkommen")]
         public double NettoEinkommen { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]

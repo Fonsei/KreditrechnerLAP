@@ -110,6 +110,7 @@
           <Property Name="Vorname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Nachname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Geburtsdatum" Type="date" Nullable="false" />
+          <Property Name="Kinder" Type="int" Nullable="false" />
           <Property Name="FKTitel" Type="int" />
           <Property Name="FKArbeitgeber" Type="int" />
           <Property Name="FKFamilienstand" Type="int" />
@@ -550,6 +551,7 @@
           <NavigationProperty Name="Wohnart" Relationship="Self.FK__tblKunde__FKWohn__38996AB5" FromRole="tblKunde" ToRole="tblWohnart" />
           <Property Name="FKArbeitgeber" Type="Int32" />
           <NavigationProperty Name="Arbeitgeber" Relationship="dbKreditInstitutModel.FK__tblKunde__FKArbe__29572725" FromRole="Kunde" ToRole="Arbeitgeber" />
+          <Property Name="Kinder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Land">
           <Key>
@@ -962,6 +964,7 @@
           <EntitySetMapping Name="AlleKunden">
             <EntityTypeMapping TypeName="dbKreditInstitutModel.Kunde">
               <MappingFragment StoreEntitySet="tblKunde">
+                <ScalarProperty Name="Kinder" ColumnName="Kinder" />
                 <ScalarProperty Name="FKArbeitgeber" ColumnName="FKArbeitgeber" />
                 <ScalarProperty Name="ID" ColumnName="IDKunde" />
                 <ScalarProperty Name="Vorname" ColumnName="Vorname" />

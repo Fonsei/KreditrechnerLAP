@@ -154,22 +154,27 @@ namespace KreditrechnerLAP.logic
 
                     if (aktKunde != null)
                     {
-                        FinanzielleSituation neueFinanzielleSituation = new FinanzielleSituation()
-                        {
-                            
-                            NettoEinkommen = (decimal)nettoEinkommen,
-                            Unterhaltszahlung = (decimal)unterhaltsZahlungen,
-                            EinkünfteAlimente = (decimal)einkünfteAlimenteUnterhalt,
-                            Wohnkosten = (decimal)wohnkosten,
-                            Ratenverpflichtung = (decimal)ratenVerpflichtungen,
-                            ID = idKunde
-                        };
 
-                        context.AlleFinanzielleSituationen.Add(neueFinanzielleSituation);
+                        FinanzielleSituation neueFinanzielleSituation = context.AlleFinanzielleSituationen.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                        if (neueFinanzielleSituation == null)
+                        {
+                            neueFinanzielleSituation = new FinanzielleSituation();
+                        }
+
+                        neueFinanzielleSituation.NettoEinkommen = (decimal)nettoEinkommen;
+                        neueFinanzielleSituation.Unterhaltszahlung = (decimal)unterhaltsZahlungen;
+                        neueFinanzielleSituation.EinkünfteAlimente = (decimal)einkünfteAlimenteUnterhalt;
+                        neueFinanzielleSituation.Wohnkosten = (decimal)wohnkosten;
+                        neueFinanzielleSituation.Ratenverpflichtung = (decimal)ratenVerpflichtungen;
+
+                        aktKunde.FinanzielleSituation = neueFinanzielleSituation;
+
+                        //context.AlleFinanzielleSituationen.Add(neueFinanzielleSituation);
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
-                    erfolgreich = anzahlZeilenBetroffen >= 1;
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} FinanzielleSituation gespeichert!");
                 }
             }
@@ -185,6 +190,34 @@ namespace KreditrechnerLAP.logic
             Debug.Unindent();
             return erfolgreich;
         }
+
+        public static FinanzielleSituation FinanzielleSituationAngabenLaden(int idKunde)
+        {
+            Debug.WriteLine("KreditInstitut - FinanzielleSituationAngabenLaden");
+            Debug.Indent();
+
+            FinanzielleSituation alleFinanzielleSituationen = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    alleFinanzielleSituationen = context.AlleFinanzielleSituationen.Where(x => x.ID == idKunde).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in FinanzielleSituationAngabenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return alleFinanzielleSituationen;
+        }
+
 
         /// <summary>
         /// Liefert alle Beschäftigungsarten zurück
@@ -409,11 +442,6 @@ namespace KreditrechnerLAP.logic
             return alleIdentifikationsArten;
         }
 
-        
-
-
-
-
 
         /// <summary>
         /// Liefert alle Titel zurück
@@ -474,7 +502,7 @@ namespace KreditrechnerLAP.logic
             return kontoDaten;
         }
 
-        public static bool PersoenlicheDatenSpeichern(int? idTitel, string geschlecht, DateTime geburtsDatum, string vorname, string nachname, int? idTitelNachstehend, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
+        public static bool PersoenlicheDatenSpeichern(int? idTitel, string geschlecht,int kinder, DateTime geburtsDatum, string vorname, string nachname, int? idTitelNachstehend, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
         {
             Debug.WriteLine("KreditInstitut - PersönlicheDatenSpeichern");
             Debug.Indent();
@@ -498,6 +526,7 @@ namespace KreditrechnerLAP.logic
                         aktKunde.FKAusbildung = idBildung;
                         aktKunde.FKStaatsbuergerschaft = idStaatsbuergerschaft;
                         aktKunde.FKTitel = idTitel;
+                        aktKunde.Kinder = kinder;
                         aktKunde.FKIdentifikationsArt = idIdentifikationsart;
                         aktKunde.Idendifikationsnummer = identifikationsNummer;
                         aktKunde.Geschlecht = geschlecht;
@@ -569,6 +598,7 @@ namespace KreditrechnerLAP.logic
                         .Include("FinanzielleSituation")
                         .Include("IdentifikationsArt")
                         .Include("Kontaktdaten")
+                        .Include("Kontaktdaten.Ort")
                         .Include("Konto")
                         .Include("Kredit")
                         .Include("Ausbildung")
@@ -662,10 +692,12 @@ namespace KreditrechnerLAP.logic
             Debug.Unindent();
             return arbeitGeber;
         }
-
+ 
 
         public static bool KontaktDatenSpeichern(string strasse, string hausnummer, string stiege, string tuer, int fkort, string email, string telefonnummer, int idKunde)
         {
+            Debug.WriteLine("KreditInstitut - KontaktDatenSpeichern");
+            Debug.Indent();
 
             bool erfolgreich = false;
 
@@ -679,20 +711,24 @@ namespace KreditrechnerLAP.logic
 
                     if (aktKunde != null)
                     {
+                        Kontaktdaten kontaktdaten = context.AlleKontaktdaten.FirstOrDefault(x => x.ID == idKunde);
 
+                        if (kontaktdaten == null)
+                        {
+                            kontaktdaten = new Kontaktdaten();
+                            context.AlleKontaktdaten.Add(kontaktdaten);
+                        }
 
-                        Kontaktdaten kontakt = new Kontaktdaten() {
-                            Strasse = strasse,
-                            Hausnummer = hausnummer,
-                            Stiege =stiege,
-                            Tuer = tuer,
-                            FKOrt = fkort,
-                            Telefonnummer = telefonnummer,
-                            EMail = email
+                        
+                        kontaktdaten.Strasse = strasse;
+                        kontaktdaten.Hausnummer = hausnummer;
+                        kontaktdaten.Stiege = stiege;
+                        kontaktdaten.Tuer = tuer;
+                        kontaktdaten.FKOrt = fkort;
+                        kontaktdaten.Telefonnummer = telefonnummer;
+                        kontaktdaten.EMail = email;
+                        aktKunde.Kontaktdaten = kontaktdaten;
                     };
-                        aktKunde.Kontaktdaten = kontakt;
-
-                    }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
                     erfolgreich = anzahlZeilenBetroffen >= 0;
@@ -756,14 +792,20 @@ namespace KreditrechnerLAP.logic
 
                     if (aktKunde != null)
                     {
-                        Konto kontoinfo = new Konto()
-                        {
-                            Bankname = bankname,
-                            IBAN = iban,
-                            BIC = bic
-                        };
+                        Konto kontoinfo = context.AlleKonto.Where(x => x.ID == idKunde).FirstOrDefault();
 
+                        if (kontoinfo == null)
+                        {
+                            kontoinfo = new Konto();
+                            context.AlleKonto.Add(kontoinfo);
+                        }
+
+
+                        kontoinfo.Bankname = bankname;
+                        kontoinfo.IBAN = iban;
+                        kontoinfo.BIC = bic;
                         aktKunde.Konto = kontoinfo;
+
 
                         
 
@@ -789,8 +831,6 @@ namespace KreditrechnerLAP.logic
         }
 
 
-       
-
         /// <summary>
         /// Ladet alle Ort und gibt siwe zurück
         /// </summary>
@@ -810,7 +850,17 @@ namespace KreditrechnerLAP.logic
             return alleOrte;
         }
 
-
-
+        /// <summary>
+        /// Gets the age of eg. a person from its birthday.
+        /// </summary>
+        /// <param name="geburtstag">The birthday.</param>
+        /// <returns>The age in years.</returns>
+        public static int Alter(DateTime geburtstag)
+        {
+            int years = DateTime.Now.Year - geburtstag.Year;
+            geburtstag = geburtstag.AddYears(years);
+            if (DateTime.Now.CompareTo(geburtstag) < 0) { years--; }
+            return years;
+        }
     }
 }
