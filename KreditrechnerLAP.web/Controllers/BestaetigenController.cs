@@ -1,9 +1,13 @@
-﻿using System;
+﻿using KreditrechnerLAP.logic;
+using onlineKredit.web.Models;
+using RazorPDF;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rotativa;
 
 namespace KreditrechnerLAP.web.Controllers
 {

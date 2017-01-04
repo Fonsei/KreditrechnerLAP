@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Beschaeftigtseit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Beschaeftigtseit, "{0:yyyy-MM}", new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;" } })
+                @Html.EditorFor(model => model.Beschaeftigtseit, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "datepicker1", @style = "width: 48%;" } })
                 @Html.ValidationMessageFor(model => model.Beschaeftigtseit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,10 +69,12 @@
         var dateNow = new Date();
         $('.datepicker1').datepicker({
             language: 'de',
-            format: 'yyyy-mm',
+            format: 'yyyy-mm-dd',
         });
 
+
     })
+
 
     
 </script>

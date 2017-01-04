@@ -862,5 +862,13 @@ namespace KreditrechnerLAP.logic
             if (DateTime.Now.CompareTo(geburtstag) < 0) { years--; }
             return years;
         }
+
+
+        public static void PDF(int idKunde){
+
+            
+        }
+
+
     }
 }

@@ -1,0 +1,319 @@
+﻿@model onlineKredit.web.Models.ZusammenfassungModel
+@{
+    ViewBag.Title = "Zusammenfassung";
+}
+<h2>Zusammenfassung</h2>
+<div class="container">
+    <div class="row">
+        <div>
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12"><h3>Kreditrahmen</h3></div>
+
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.GewünschterBetrag) :
+                @Html.DisplayFor(model => model.GewünschterBetrag)
+            </div>
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Laufzeit) :
+                @Html.DisplayFor(model => model.Laufzeit)
+            </div>
+            <div class="col-md-4">
+               
+            </div>
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Finanzielle Situation</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.NettoEinkommen) :
+                @Html.DisplayFor(model => model.NettoEinkommen)
+            </div>
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Wohnkosten) : 
+                @Html.DisplayFor(model => model.Wohnkosten)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.EinkünfteAlimenteUnterhalt) :
+                @Html.DisplayFor(model => model.EinkünfteAlimenteUnterhalt)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.UnterhaltsZahlungen) :
+                @Html.DisplayFor(model => model.UnterhaltsZahlungen)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.RatenVerpflichtungen) :
+                @Html.DisplayFor(model => model.RatenVerpflichtungen)
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Persönliche daten</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Geschlecht) :
+                @Html.DisplayFor(model => model.Geschlecht)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Vorname) :
+                @Html.DisplayFor(model => model.Vorname)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Nachname) :
+                @Html.DisplayFor(model => model.Nachname)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Titel) :
+                @Html.DisplayFor(model => model.Titel)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.GeburtsDatum) :
+                @Html.DisplayFor(model => model.GeburtsDatum)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Staatsbuergerschaft) :
+                @Html.DisplayFor(model => model.Staatsbuergerschaft)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.AnzahlUnterhaltspflichtigeKinder) :
+                @Html.DisplayFor(model => model.AnzahlUnterhaltspflichtigeKinder)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Familienstand) :
+                @Html.DisplayFor(model => model.Familienstand)
+            </div>
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Wohnart) :
+                @Html.DisplayFor(model => model.Wohnart)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Bildung) :
+                @Html.DisplayFor(model => model.Bildung)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Identifikationsart) :
+                @Html.DisplayFor(model => model.Identifikationsart)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.IdentifikationsNummer) :
+                @Html.DisplayFor(model => model.IdentifikationsNummer)
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+            <div class="col-md-2">
+            </div>
+
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Arbeitgeber</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.FirmenName) :
+                @Html.DisplayFor(model => model.FirmenName)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.BeschäftigungsArt) :
+                @Html.DisplayFor(model => model.BeschäftigungsArt)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Branche) :
+                @Html.DisplayFor(model => model.Branche)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.BeschäftigtSeit) :
+                @Html.DisplayFor(model => model.BeschäftigtSeit)
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+            <div class="col-md-2">
+               
+            </div>
+
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Kontaktdaten</h3>
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Strasse) :
+                @Html.DisplayFor(model => model.Strasse)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Hausnummer) :
+                @Html.DisplayFor(model => model.Hausnummer)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Ort) :
+                @Html.DisplayFor(model => model.Anzeige)
+            </div>
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Mail) :
+                @Html.DisplayFor(model => model.Mail)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.TelefonNummer) :
+                @Html.DisplayFor(model => model.TelefonNummer)
+            </div>
+            <div class="col-md-4">
+               
+            </div>
+            <div class="col-md-2">
+
+            </div>
+
+
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                <h3>Kontodaten</h3>
+            </div>
+            @*<div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.NeuesKonto):
+                @Html.DisplayFor(model => model.NeuesKonto)
+            </div>
+            <div class="col-md-6">
+                
+            </div>*@
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.BankName) :
+                @Html.DisplayFor(model => model.BankName)
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.IBAN) :
+                @Html.DisplayFor(model => model.IBAN)
+            </div>
+            <div class="col-md-6">
+               
+            </div>
+            <div class="col-md-offset-2"></div>
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.BIC) :
+                @Html.DisplayFor(model => model.BIC)
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+            <div class="col-md-2">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

@@ -1,11 +1,16 @@
-﻿using KreditrechnerLAP.freigabe;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using KreditrechnerLAP.freigabe;
 using KreditrechnerLAP.logic;
 using KreditrechnerLAP.web.Models;
 using onlineKredit.web.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -529,6 +534,8 @@ namespace KreditrechnerLAP.web.Controllers
             /// alle gespeicherten Daten (ACHTUNG! das sind viele ....)
             /// gib Sie alle in das ZusammenfassungsModel (bzw. die UNTER-Modelle) 
             /// hinein.
+            /// 
+
             ZusammenfassungModel model = new ZusammenfassungModel();
             model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
 
@@ -575,17 +582,61 @@ namespace KreditrechnerLAP.web.Controllers
             model.BankName = aktKunde.Konto?.Bankname;
             model.IBAN = aktKunde.Konto?.IBAN;
             model.BIC = aktKunde.Konto?.BIC;
-
+                
             /// gib model an die View
             return View(model);
         }
 
-
-        [HttpPost]
-        public ActionResult Zusammenfassung(Konto model)
+        [HttpGet]
+        public ActionResult Zusammenfassungpdf()
         {
             Debug.WriteLine("POST - KreditRechnerController - Zusammenfassung");
-            Debug.Indent();
+            ZusammenfassungModel model = new ZusammenfassungModel();
+            // model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
+            model.ID_Kunde = 3;
+            /// lädt ALLE Daten zu diesem Kunden (also auch die angehängten/referenzierten
+            /// Entities) aus der DB
+            Kunde aktKunde = KreditInstitut.KundeLaden(model.ID_Kunde);
+
+            model.GewünschterBetrag = (int)aktKunde.Kredit.Betrag.Value;
+            model.Laufzeit = aktKunde.Kredit.Zeitraum.Value;
+
+            model.NettoEinkommen = (double)aktKunde.FinanzielleSituation.NettoEinkommen.Value;
+            model.Wohnkosten = (double)aktKunde.FinanzielleSituation.Wohnkosten.Value;
+            model.EinkünfteAlimenteUnterhalt = (double)aktKunde.FinanzielleSituation.EinkünfteAlimente.Value;
+            model.UnterhaltsZahlungen = (double)aktKunde.FinanzielleSituation.Unterhaltszahlung.Value;
+            model.RatenVerpflichtungen = (double)aktKunde.FinanzielleSituation.Ratenverpflichtung.Value;
+
+            model.Geschlecht = aktKunde.Geschlecht == "m" ? "Herr" : "Frau";
+            model.Vorname = aktKunde.Vorname;
+            model.Nachname = aktKunde.Nachname;
+            model.Titel = aktKunde.Titel?.Bezeichnung;
+            model.GeburtsDatum = aktKunde.Geburtsdatum;
+            model.Staatsbuergerschaft = aktKunde.Staatsbuerger?.Bezeichnung;
+            model.AnzahlUnterhaltspflichtigeKinder = aktKunde.Kinder;
+            model.Familienstand = aktKunde.Familienstand?.Bezeichnung;
+            model.Wohnart = aktKunde.Wohnart?.Bezeichnung;
+            model.Bildung = aktKunde.Ausbildung?.Bezeichnung;
+            model.Identifikationsart = aktKunde.IdentifikationsArt?.Bezeichnung;
+            model.IdentifikationsNummer = aktKunde.Idendifikationsnummer;
+
+            model.FirmenName = aktKunde.Arbeitgeber?.Firmenname;
+            model.BeschäftigungsArt = aktKunde.Arbeitgeber?.Beschaeftigungsart?.Bezeichnung;
+            model.Branche = aktKunde.Arbeitgeber?.Branche?.Bezeichnung;
+            model.BeschäftigtSeit = aktKunde.Arbeitgeber?.BeschaeftigtSeit.Value.ToShortDateString();
+
+            model.Strasse = aktKunde.Kontaktdaten?.Strasse;
+            model.Hausnummer = aktKunde.Kontaktdaten?.Hausnummer;
+            //model.Ort = aktKunde.Kontaktdaten.FKOrt.Value;
+            model.PLZ = aktKunde.Kontaktdaten?.Ort.PLZ;
+            model.Ort = aktKunde.Kontaktdaten?.Ort.Bezeichnung;
+            model.Mail = aktKunde.Kontaktdaten?.EMail;
+            model.TelefonNummer = aktKunde.Kontaktdaten?.Telefonnummer;
+
+            //model.NeuesKonto = (bool)aktKunde.Konto?.KontoNeu;
+            model.BankName = aktKunde.Konto?.Bankname;
+            model.IBAN = aktKunde.Konto?.IBAN;
+            model.BIC = aktKunde.Konto?.BIC;
 
 
             Debug.Unindent();
@@ -606,7 +657,7 @@ namespace KreditrechnerLAP.web.Controllers
 
                 //int idKunde = int.Parse(Request.Cookies["idKunde"].Value);
                 Kunde aktKunde = KreditInstitut.KundeLaden(id);
-                Response.Cookies.Remove("idKunde");
+                //Response.Cookies.Remove("idKunde");
 
                 bool istFreigegeben = Kreditfreigeben.FreigabeErteilt(
                                                           aktKunde.Geschlecht,
@@ -623,7 +674,7 @@ namespace KreditrechnerLAP.web.Controllers
                 Debug.WriteLine($"Kreditfreigabe {(istFreigegeben ? "" : "nicht")}erteilt!");
 
                 Debug.Unindent();
-                return RedirectToAction("Index", "Bestaetigen", new { erfolgreich = istFreigegeben });
+                return RedirectToAction("Index", "Bestaetigen", new { erfolgreich = istFreigegeben, idKunde = id});
 
             }
             else
@@ -631,6 +682,33 @@ namespace KreditrechnerLAP.web.Controllers
                 return RedirectToAction("Zusammenfassung");
             }
         }
-        
+
+        [HttpGet]
+        public ActionResult Pdfexport()
+        {
+            Debug.WriteLine("");
+            Debug.Indent();
+            ZusammenfassungModel model = new ZusammenfassungModel();
+            model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
+            Kunde aktKunde = KreditInstitut.KundeLaden(model.ID_Kunde);
+            string kunde = aktKunde.Nachname;
+            string Path = aktKunde.Nachname + ".pdf";
+            string pdfaction = "Zusammenfassungpdf";
+
+
+            Debug.Unindent();
+            //new ActionAsPdf("Index", fullname) { FileName = "Test.pdf" };
+
+            //return new ViewAsPdf(model)
+            //{
+            //    FileName = Path
+            //};
+
+            return new ActionAsPdf(pdfaction, model)
+            {
+                FileName = Path
+            };
+        }
+
     }
 }
