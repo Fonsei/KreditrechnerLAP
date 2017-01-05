@@ -232,6 +232,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="readme.txt" />
+    <Content Include="Content\pdf\Handbuch.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
