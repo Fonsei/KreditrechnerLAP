@@ -70,6 +70,8 @@
             $('.form-horizontal .form-control').prop('disabled', $('#NeuesKonto').is(':checked'));
             $('#NeuesKonto').change(function () {
                 $("#Bankname").val("Deutschebank AG");
+                $("#IBAN").val("Neuer IBAN");
+                $("#BIC").val("Neuer BIC");
                 $('.form-horizontal .form-control').prop('disabled', $(this).is(':checked'));
                 
             });

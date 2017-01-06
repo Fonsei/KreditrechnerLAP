@@ -207,12 +207,15 @@ GO
 INSERT INTO tblBeschaeftigungsart(BeschaeftigungsArt)
 VALUES
 ('Angestellter'),
-('Arbeiter')
+('Arbeiter'),
+('Beamter')
 GO
 
 INSERT INTO tblBranche(Branche)
 VALUES
 ('Bau'),
 ('Metal'),
-('Kaufmänisch')
+('Kaufmännisch'),
+('IT'),
+('Verkauf')
 GO

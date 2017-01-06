@@ -9,7 +9,7 @@ namespace KreditrechnerLAP.logic
 {
     public class KreditInstitut
     {
-        public static Kunde ErzeugeKunde()
+        public static Kunde ErzeugeKunde(int idKunde)
         {
             Debug.WriteLine("KreditInstitut - ErzeugeKunde");
             Debug.Indent();
@@ -20,12 +20,16 @@ namespace KreditrechnerLAP.logic
             {
                 using (var context = new dbKreditInstitutEntities())
                 {
-                    neuerKunde = new logic.Kunde()
+                    neuerKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    if (neuerKunde == null)
                     {
-                        Vorname = "anonym",
-                        Nachname = "anonym"
-                        //Gechlecht = "x"
-                    };
+                        neuerKunde = new logic.Kunde()
+                        {
+                            Vorname = "anonym",
+                            Nachname = "anonym"
+                            //Gechlecht = "x"
+                        };
+                    }
                     context.AlleKunden.Add(neuerKunde);
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
@@ -577,6 +581,40 @@ namespace KreditrechnerLAP.logic
 
             Debug.Unindent();
             return persönlicheDaten;
+        }
+
+        public static Kunde KundeSuchen(int idKunde)
+        {
+
+            Debug.WriteLine("KreditInstitut - KundeSuchen");
+            Debug.Indent();
+            Kunde aktuellerKunde = null;
+
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    aktuellerKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Debug.WriteLine("KundeSuchen geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Fehler in KundeSuchen");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+
+
+
+            Debug.Unindent();
+            return aktuellerKunde;
+
+
         }
 
         public static Kunde KundeLaden(int idKunde)

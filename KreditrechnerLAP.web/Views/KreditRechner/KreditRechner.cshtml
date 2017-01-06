@@ -10,7 +10,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(x => x.ID_Kunde)
     <div class="form-horizontal">
 
         <hr />
@@ -32,12 +32,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Zinsen, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                <input id="Zinsen" value="1.05" min="1.05" max="3.5" style="border:none; background-color:#FFF;width: 31px;"  disabled />%
             </div>
-        </div>
+        </div>*@
         <div class="col-md-12" style="text-align:center;">
             <div class="ratedisplay">
                 <span id="ergebnis" >83.33</span> €
@@ -68,14 +68,18 @@
 
             var track = function (data) {
                 $result.html("Value: " + data.from);
+
+                var $test = 4000;
+
             };
+            
 
             $range.ionRangeSlider({
                 type: "single",
                 grid: true,
                 min: 3000,
                 max: 40000,
-                from: 5000,
+                //from: $test,
                 step: 500,
                 postfix: " €",
                 onStart: track,
@@ -99,7 +103,7 @@
                 grid: true,
                 min: 12,
                 max: 120,
-                from: 60,
+                //from: 60,
                 step: 6,
                 postfix: " Monate",
                 onStart: track,
@@ -113,31 +117,31 @@
 function berechnen() {
     var kredit = parseInt(document.getElementById('example_id').value);
     var monat = parseInt(document.getElementById('example_id2').value);
-    var zinsen = parseFloat(document.getElementById('Zinsen').value);
-    //erg = Math.round(((kredit / monat) * zinsen) * 100) / 100;
+    //var zinsen = parseFloat(document.getElementById('Zinsen').value);
+    //erg = Math.round(((  (kredit/100) * zinsen + kredit) /monat) * 100) / 100;
 
-    erg = Math.round(((  (kredit/100) * zinsen + kredit) /monat) * 100) / 100;
+    erg = Math.round(kredit / monat);
      
 
     document.getElementById('ergebnis').innerHTML = erg;
    
 }
 
-//Zinsen ermittlung 
-function Zinsen1() {
-    var kredit = document.getElementById('example_id').value;
-    var erg = 1.05;
-    if (kredit <= 10000) {
-        erg = 2.5;
-    }
-    else if (kredit <= 20000){
-        erg = 2.0;
-    }
-    else if (kredit <= 30000){
-        erg = 1.5;
-        }
-    document.getElementById('Zinsen').value = erg;
-}
+////Zinsen ermittlung 
+//function Zinsen1() {
+//    var kredit = document.getElementById('example_id').value;
+//    var erg = 1.05;
+//    if (kredit <= 10000) {
+//        erg = 2.5;
+//    }
+//    else if (kredit <= 20000){
+//        erg = 2.0;
+//    }
+//    else if (kredit <= 30000){
+//        erg = 1.5;
+//        }
+//    document.getElementById('Zinsen').value = erg;
+//}
 
 
 </script>

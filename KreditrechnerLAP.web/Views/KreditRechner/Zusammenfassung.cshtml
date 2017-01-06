@@ -103,18 +103,21 @@
                 @Html.DisplayFor(model => model.Nachname)
             </div>
             <div class="col-md-offset-2"></div>
-            <div class="col-md-4">
-                @Html.DisplayNameFor(model => model.Titel)
-            </div>
+            @if (Model.Titel != "Kein Titel" || Model.Titel == null) {
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Titel)
+                </div>
             <div class="col-md-6">
                 @Html.DisplayFor(model => model.Titel)
             </div>
+            }
+
             <div class="col-md-offset-2"></div>
             <div class="col-md-4">
                 @Html.DisplayNameFor(model => model.GeburtsDatum)
             </div>
             <div class="col-md-6">
-                @Html.DisplayFor(model => model.GeburtsDatum)
+                @Html.DisplayFor(model => model.GeburtsDatum, "ShortDateTime")
             </div>
             <div class="col-md-offset-2"></div>
             <div class="col-md-4">

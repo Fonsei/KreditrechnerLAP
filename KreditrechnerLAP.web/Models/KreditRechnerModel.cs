@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace KreditrechnerLAP.web.Models
 {
@@ -24,6 +25,9 @@ namespace KreditrechnerLAP.web.Models
         
         public double Zinsen { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        [Required]
+        public int ID_Kunde { get; set; }
 
 
     }

@@ -27,7 +27,7 @@ namespace KreditrechnerLAP.web.Controllers
             KreditRechnerModel model = new KreditRechnerModel()
             {
                 Kreditbetrag = 25000,  // default Werte
-                Zeitraum = 12   // default Werte
+                Zeitraum = 60   // default Werte
             };
             int id = -1;
             if (Request.Cookies["idKunde"] != null && int.TryParse(Request.Cookies["idKunde"].Value, out id))
@@ -36,6 +36,7 @@ namespace KreditrechnerLAP.web.Controllers
                 Kredit wunsch = KreditInstitut.KreditRahmenLaden(id);
                 model.Kreditbetrag = (int)wunsch.Betrag.Value;
                 model.Zeitraum = wunsch.Zeitraum.Value;
+                model.ID_Kunde = wunsch.ID;
             }
 
             Debug.Unindent();
@@ -49,7 +50,7 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.Indent();
             if (ModelState.IsValid)
             {
-                Kunde neuerKunde = KreditInstitut.ErzeugeKunde();
+                Kunde neuerKunde = KreditInstitut.ErzeugeKunde(model.ID_Kunde);
 
                 if (neuerKunde != null && KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Zeitraum, neuerKunde.ID))
                 {
@@ -203,7 +204,14 @@ namespace KreditrechnerLAP.web.Controllers
                 model.Vorname = kunde.Vorname;
                 model.Nachname = kunde.Nachname;
                 model.ID_Titel = kunde.FKTitel.HasValue ? kunde.FKTitel.Value : 0;
-                model.GeburtsDatum = DateTime.Now;
+                //if(model.GeburtsDatum == null)
+                //{
+                //    model.GeburtsDatum = DateTime.Now.Date;
+                //}
+                //else
+                //{
+                    model.GeburtsDatum = kunde.Geburtsdatum.Date;
+                //}
                 model.ID_Staatsbuergerschaft = kunde.FKStaatsbuergerschaft;
                 model.ID_Familienstand = kunde.FKFamilienstand.HasValue ? kunde.FKFamilienstand.Value : 0;
                 model.ID_Wohnart = kunde.FKWohnart.HasValue ? kunde.FKWohnart.Value : 0;
@@ -593,7 +601,7 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.WriteLine("POST - KreditRechnerController - Zusammenfassung");
             ZusammenfassungModel model = new ZusammenfassungModel();
             // model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
-            model.ID_Kunde = 3;
+            model.ID_Kunde = 1;
             /// lädt ALLE Daten zu diesem Kunden (also auch die angehängten/referenzierten
             /// Entities) aus der DB
             Kunde aktKunde = KreditInstitut.KundeLaden(model.ID_Kunde);

@@ -1,6 +1,7 @@
 ﻿using KreditrechnerLAP.web.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -42,6 +43,8 @@ namespace onlineKredit.web.Models
 
         public string TitelNachstehend { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+               ApplyFormatInEditMode = true)]
         public DateTime GeburtsDatum { get; set; }
 
         public string Staatsbuergerschaft { get; set; }
@@ -66,6 +69,8 @@ namespace onlineKredit.web.Models
 
         public string Branche { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/yyyy}",
+               ApplyFormatInEditMode = true)]
         public string BeschäftigtSeit { get; set; }
         #endregion
 
