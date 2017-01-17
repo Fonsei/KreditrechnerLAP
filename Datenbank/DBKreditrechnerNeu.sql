@@ -2,12 +2,20 @@
 --KARL Manuel
 USE MASTER
 GO
-DROP DATABASE dbKreditInstitut
-GO
+--DROP DATABASE dbKreditInstitut
+--GO
 CREATE DATABASE dbKreditInstitut
 GO
 USE dbKreditInstitut
 GO
+
+CREATE TABLE tblAdmin(
+	 IDAdmin INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	 Username VARCHAR(50) NOT NULL,
+	 Passwort VARCHAR(255) NOT NULL
+)
+GO
+
 
 CREATE TABLE tblEinstellungen(
 	IDEinstellungen INT IDENTITY(1,1)  PRIMARY KEY NOT NULL,

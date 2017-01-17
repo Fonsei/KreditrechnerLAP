@@ -279,6 +279,7 @@ nav.linkEffects.linkHoverEffect_12 ul {
 .rslides img {
 	height: auto;
 	border: 0;
+    width: 100%;
 }
 .callbacks_tabs {
 	list-style: none;

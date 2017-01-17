@@ -1,4 +1,4 @@
-﻿// Die T4-Codegenerierung ist für Modell 'C:\Users\karlmanu\Documents\Visual Studio 2015\Projects\KreditrechnerLAP 20.12.2016 12.34 Uhr Fertig\KreditrechnerLAP-master\KreditrechnerLAP.logic\Model1.edmx' aktiviert. 
+﻿// Die T4-Codegenerierung ist für Modell 'F:\Lap Projekt\Github\KreditrechnerLAP\KreditrechnerLAP.logic\Model1.edmx' aktiviert. 
 // Um die Generierung von Legacycode zu aktivieren, ändern Sie den Wert der Designer-Eigenschaft 'Code Generation Strategy'
 // in 'Legacy ObjectContext'. Diese Eigenschaft wird im Eigenschaftenfenster angezeigt, wenn das Modell
 // im Designer geöffnet ist.

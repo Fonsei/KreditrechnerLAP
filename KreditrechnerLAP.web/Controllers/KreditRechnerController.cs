@@ -50,16 +50,28 @@ namespace KreditrechnerLAP.web.Controllers
             Debug.Indent();
             if (ModelState.IsValid)
             {
-                Kunde neuerKunde = KreditInstitut.ErzeugeKunde(model.ID_Kunde);
+                Kunde neuerKunde = null;
+                //Kunde neuerKunde = KreditInstitut.ErzeugeKunde(model.ID_Kunde);
+                if (model.ID_Kunde == 0) {
+                    neuerKunde = KreditInstitut.ErzeugeKunde();
 
-                if (neuerKunde != null && KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Zeitraum, neuerKunde.ID))
+                    if (neuerKunde != null && KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Zeitraum, neuerKunde.ID))
+                    {
+                        /// ich benötige für alle weiteren Schritte die ID 
+                        /// des angelegten Kunden. Damit ich diese bei der nächsten Action 
+                        /// habe, speichere ich sie für diesen Zweck in ein Cookie 
+                        Response.Cookies.Add(new HttpCookie("idKunde", neuerKunde.ID.ToString()));
+                        /// gehe zum nächsten Schritt 
+                        return RedirectToAction("Finanzielles");
+                    }
+                }
+                else
                 {
-                    /// ich benötige für alle weiteren Schritte die ID 
-                    /// des angelegten Kunden. Damit ich diese bei der nächsten Action 
-                    /// habe, speichere ich sie für diesen Zweck in ein Cookie 
-                    Response.Cookies.Add(new HttpCookie("idKunde", neuerKunde.ID.ToString()));
-                    /// gehe zum nächsten Schritt 
-                    return RedirectToAction("Finanzielles");
+                    
+                    if(KreditInstitut.KreditRahmenSpeichern(model.Kreditbetrag, model.Zeitraum, model.ID_Kunde))
+                    {
+                        return RedirectToAction("Finanzielles");
+                    }
                 }
             }
                 Debugger.Break();
@@ -600,8 +612,8 @@ namespace KreditrechnerLAP.web.Controllers
         {
             Debug.WriteLine("POST - KreditRechnerController - Zusammenfassung");
             ZusammenfassungModel model = new ZusammenfassungModel();
-            // model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
-            model.ID_Kunde = 1;
+             model.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value);
+            //model.ID_Kunde = 1;
             /// lädt ALLE Daten zu diesem Kunden (also auch die angehängten/referenzierten
             /// Entities) aus der DB
             Kunde aktKunde = KreditInstitut.KundeLaden(model.ID_Kunde);

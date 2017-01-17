@@ -140,12 +140,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BestaetigenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KreditRechnerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnmeldeModel.cs" />
     <Compile Include="Models\ArbeitgeberModel.cs" />
     <Compile Include="Models\BeschaeftigungsArtModel.cs" />
     <Compile Include="Models\BildungsModel.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Models\IdentifikationsModel.cs" />
     <Compile Include="Models\KontaktdatenModel.cs" />
     <Compile Include="Models\KontoInformationenModel.cs" />
+    <Compile Include="Models\KreditantragListeModel.cs" />
     <Compile Include="Models\KreditRechnerModel.cs" />
     <Compile Include="Models\NachschlageFeldModel.cs" />
     <Compile Include="Models\OrteModel.cs" />
@@ -266,6 +269,8 @@
     <Content Include="Views\KreditRechner\KontoInformationen.cshtml" />
     <Content Include="Views\Bestaetigen\Index.cshtml" />
     <Content Include="Views\KreditRechner\Zusammenfassungpdf.cshtml" />
+    <Content Include="Views\Administration\Administration.cshtml" />
+    <Content Include="Views\Administration\Kreditantraege.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

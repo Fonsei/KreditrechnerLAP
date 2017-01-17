@@ -64,6 +64,8 @@ public partial class dbKreditInstitutEntities : DbContext
 
     public DbSet<Wohnart> AlleWohnarten { get; set; }
 
+    public DbSet<Admin> AlleAdmins { get; set; }
+
 }
 
 }

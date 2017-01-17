@@ -36,6 +36,7 @@
         <AssociationConnector Association="dbKreditInstitutModel.FK__tblKunde__FKWohn__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="dbKreditInstitutModel.FK__tblOrt__FKLand__2F10007B" ManuallyRouted="false" />
         <AssociationConnector Association="dbKreditInstitutModel.FK__tblKunde__FKArbe__29572725" />
+        <EntityTypeShape EntityType="dbKreditInstitutModel.Admin" Width="1.5" PointX="6" PointY="3.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

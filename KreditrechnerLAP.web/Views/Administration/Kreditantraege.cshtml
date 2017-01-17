@@ -1,0 +1,93 @@
+﻿@model IEnumerable<KreditrechnerLAP.web.Models.KreditantragListeModel>
+
+@{
+    ViewBag.Title = "Kreditantraege";
+}
+
+<h2>Kreditantraege</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_Kunde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GewünschterBetrag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Laufzeit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NettoEinkommen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Geschlecht)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nachname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Staatsbuergerschaft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Familienstand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Identifikationsart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdentifikationsNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_Kunde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GewünschterBetrag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Laufzeit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NettoEinkommen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Geschlecht)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nachname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Staatsbuergerschaft)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Familienstand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Identifikationsart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdentifikationsNummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

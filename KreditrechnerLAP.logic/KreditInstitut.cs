@@ -9,7 +9,7 @@ namespace KreditrechnerLAP.logic
 {
     public class KreditInstitut
     {
-        public static Kunde ErzeugeKunde(int idKunde)
+        public static Kunde ErzeugeKunde()
         {
             Debug.WriteLine("KreditInstitut - ErzeugeKunde");
             Debug.Indent();
@@ -20,16 +20,14 @@ namespace KreditrechnerLAP.logic
             {
                 using (var context = new dbKreditInstitutEntities())
                 {
-                    neuerKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
-                    if (neuerKunde == null)
+                    
+                    neuerKunde = new logic.Kunde()
                     {
-                        neuerKunde = new logic.Kunde()
-                        {
-                            Vorname = "anonym",
-                            Nachname = "anonym"
-                            //Gechlecht = "x"
-                        };
-                    }
+                        Vorname = "anonym",
+                        Nachname = "anonym"
+                        //Gechlecht = "x"
+                    };
+                    
                     context.AlleKunden.Add(neuerKunde);
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
@@ -49,7 +47,84 @@ namespace KreditrechnerLAP.logic
             return neuerKunde;
         }
 
-        
+        public static bool Anmeldung(string nickname, string password)
+        {
+            Debug.WriteLine("KreditInstitut - Anmeldung");
+            Debug.Indent();
+            bool erfolgreich = false;
+            try
+            {
+                using (var context = new dbKreditInstitutEntities())
+                {
+                    Admin a = context.AlleAdmins.Where(x => x.Username == nickname).FirstOrDefault();
+
+                    if (a != null)
+                    {
+                        if (a.Passwort == password)
+                        {
+                            erfolgreich = true;
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in Anmeldung");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+            
+
+            Debug.Unindent();
+            return erfolgreich;
+        }
+
+
+
+        //public static Kunde ErzeugeKunde(int idKunde)
+        //{
+        //    Debug.WriteLine("KreditInstitut - ErzeugeKunde");
+        //    Debug.Indent();
+
+        //    Kunde neuerKunde = null;
+
+        //    try
+        //    {
+        //        using (var context = new dbKreditInstitutEntities())
+        //        {
+        //            neuerKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+        //            if (neuerKunde == null)
+        //            {
+        //                neuerKunde = new logic.Kunde()
+        //                {
+        //                    Vorname = "anonym",
+        //                    Nachname = "anonym"
+        //                    //Gechlecht = "x"
+        //                };
+        //            }
+        //            context.AlleKunden.Add(neuerKunde);
+
+        //            int anzahlZeilenBetroffen = context.SaveChanges();
+        //            Debug.WriteLine($"{anzahlZeilenBetroffen} Kunden angelegt!");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine("Fehler in ErzeugeKunde");
+        //        Debug.Indent();
+        //        Debug.WriteLine(ex.Message);
+        //        Debug.Unindent();
+        //        Debugger.Break();
+        //    }
+
+        //    Debug.Unindent();
+        //    return neuerKunde;
+        //}
+
+
 
         /// <summary>
         /// Speichert zu einer übergebenene ID_Kunde den Wunsch Kredit und dessen Laufzeit ab
@@ -69,22 +144,45 @@ namespace KreditrechnerLAP.logic
             {
                 using (var context = new dbKreditInstitutEntities())
                 {
+                    //Kredit wunsch = null;
+                    ///// speichere zum Kunden die Angaben
+                    //Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    //wunsch = context.AlleKredite.Where(x => x.ID == idKunde).FirstOrDefault();
+                    //if (wunsch != null)
+                    //{
+                    //    wunsch.Betrag = (decimal)kreditBetrag;
+                    //    wunsch.Zeitraum = laufzeit;
+                    //}
+                    //else
+                    //{
+                    //    wunsch = new Kredit()
+                    //    {
+                    //        Betrag = (decimal)kreditBetrag,
+                    //        Zeitraum = laufzeit,
+                    //        ID = idKunde
+                    //    };
+                    //}
+                    //aktKunde.Kredit = wunsch;
 
-                    /// speichere zum Kunden die Angaben
+
                     Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
-                        Kredit neuerKreditWunsch = new Kredit()
+                        Kredit wunsch = context.AlleKredite.FirstOrDefault(x => x.ID == idKunde);
+
+                        if (wunsch == null)
                         {
-                            Betrag = (decimal)kreditBetrag,
-                            Zeitraum = laufzeit,
-                            ID = idKunde
-                        };
+                            wunsch = new Kredit();
+                            context.AlleKredite.Add(wunsch);
+                        }
 
-                        context.AlleKredite.Add(neuerKreditWunsch);
+                        wunsch.Betrag = (decimal)kreditBetrag;
+                        wunsch.Zeitraum = laufzeit;
+                            //ID = idKunde
+
+                        aktKunde.Kredit = wunsch;
                     }
-
                     int anzahlZeilenBetroffen = context.SaveChanges();
                     erfolgreich = anzahlZeilenBetroffen >= 1;
                     Debug.WriteLine($"{anzahlZeilenBetroffen} KreditRahmen gespeichert!");
@@ -836,17 +934,11 @@ namespace KreditrechnerLAP.logic
                         {
                             kontoinfo = new Konto();
                             context.AlleKonto.Add(kontoinfo);
-                        }
-
-
+                        }              
                         kontoinfo.Bankname = bankname;
                         kontoinfo.IBAN = iban;
                         kontoinfo.BIC = bic;
                         aktKunde.Konto = kontoinfo;
-
-
-                        
-
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
